@@ -1,0 +1,13 @@
+.avatar {
+display: grid ;
+ grid-template-columns: 1fr 6fr;
+ 
+}
+.avatar img {
+    height: 150px ;
+    border-radius: 10px;
+  }
+  .decoration img {
+    width: 500px;
+    border-radius: 10px;
+  }

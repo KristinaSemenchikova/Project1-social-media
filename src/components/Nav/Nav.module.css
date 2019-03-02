@@ -1,0 +1,30 @@
+.nav {
+  grid-area: n;
+  /* background: linear-gradient(to right, #8706a1 0, #d40cdb 100%);  */
+  padding: 10px 20px ;
+  height: 500px;
+  text-align: center;
+  color: white;
+}
+
+.item {
+  margin: 15px;
+}
+
+.item a {
+  text-decoration: none;
+  color: white;
+}
+.item a.active {
+  color: #ff0000;
+}
+.friends {
+ margin-top: 40px; 
+}
+.friends img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
