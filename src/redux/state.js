@@ -5,7 +5,8 @@ let state = {
     posts: [
       { id: 1, message: 'Hi,sweety', likes: 10 },
       { id: 2, message: 'Come and see my Instagram', likes: 17 }
-    ]
+    ],
+    newPostText: 'Anything meow?'
   },
   dialogsPage: {
     dialogs: [
@@ -20,7 +21,8 @@ let state = {
       { id: 2, message: 'Hi' },
       { id: 3, message: 'Lets go to party' },
       { id: 4, message: 'LOL' }
-    ]
+    ],
+    newMessage: ''
   },
   sidebar: {
     friends: [
@@ -31,10 +33,25 @@ let state = {
   }
 
 };
-export let addPost = (postMessage) => {
-  let newPost = { id: 5, message: postMessage, likes: 9 };
-  if (postMessage.length !== 0) {state.profilePage.posts.push(newPost)};
+export let addPost = () => {
+  let newPost = { id: 5, message: state.profilePage.newPostText, likes: 9 };
+  if (state.profilePage.newPostText.length !== 0) { state.profilePage.posts.push(newPost) };
+  rerenderEntireTree(state);
+  state.profilePage.newPostText = "";
+};
+export let updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 };
 
+export let sendMessage = () => {
+  let newMessage = { id: 5, message: state.dialogsPage.newMessage };
+  if (state.dialogsPage.newMessage !== 0) { state.dialogsPage.messages.push(newMessage) };
+  rerenderEntireTree(state);
+  state.dialogsPage.newMessage = "";
+};
+export let updateNewMessage = (messageText) => {
+  state.dialogsPage.newMessage = messageText;
+  rerenderEntireTree(state);
+};
 export default state;

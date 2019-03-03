@@ -1,6 +1,6 @@
 .dialogs {
  display: grid ;
- grid-template-columns: 1fr 2fr;
+ grid-template-columns: 1fr 2fr 1fr;
  padding-top: 20px;
 }
 .dialogs a {
@@ -24,3 +24,27 @@
 .active {
     color: red;
 }
+button {
+  padding: 7px 16px 8px;
+  margin: 0;
+  font-size: 15px;
+  display: inline-block;
+  zoom: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  font-family: 'Playfair Display', serif;
+  vertical-align: top;
+  line-height: 15px;
+  text-align: center;
+  text-decoration: none;
+  background: none;
+  background-color: white;
+  color: #8706a1;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  }
+  textarea {
+    resize: none;
+  }

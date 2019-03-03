@@ -3,7 +3,7 @@
   background: linear-gradient(to right, #8706a1 0, #d40cdb 45%, #f004a9 70%, #f50e66 100%);
   /* margin: 0 auto; */
   display: grid ;
-  grid-template-rows:  1fr 11fr ;
+  grid-template-rows:  60px 12fr ;
   grid-template-columns: 1fr 10fr;
   grid-template-areas: 
   "h h "
@@ -11,7 +11,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 21px;
   letter-spacing: 2px;
-
+  
  }
  .app-wrapper-content {
       grid-area: c;
