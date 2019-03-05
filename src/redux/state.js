@@ -35,28 +35,55 @@ let state = {
   }
 
 };
-export const addPost = () => {
-  let newPost = { id: 5, message: state.profilePage.newPostText, likes: 9 };
-  if (state.profilePage.newPostText.length !== 0) { state.profilePage.posts.push(newPost) };
-  rerenderEntireTree();
-  state.profilePage.newPostText = "";
-};
-export const updateNewPostText = (newText) => {
-  state.profilePage.newPostText = newText;
-  rerenderEntireTree();
-};
-
-export const sendMessage = () => {
-  let newMessage = { id: 5, message: state.dialogsPage.newMessage };
-  if (state.dialogsPage.newMessage !== 0) { state.dialogsPage.messages.push(newMessage) };
-  rerenderEntireTree();
-  state.dialogsPage.newMessage = "";
-};
-export const updateNewMessage = (messageText) => {
-  state.dialogsPage.newMessage = messageText;
-  rerenderEntireTree();
-};
-export const subscribe = (observer) => {
-  rerenderEntireTree = observer;
-}
+// create store with all methods instead of functions
 export default state;
+export let store = {
+  addPost () {
+    let newPost = { id: 5, message: state.profilePage.newPostText, likes: 9 };
+    if (state.profilePage.newPostText.length !== 0) { state.profilePage.posts.push(newPost) };
+    rerenderEntireTree();
+    state.profilePage.newPostText = "";
+  },
+  updateNewPostText (newText) {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree();
+  },
+  
+  sendMessage () {
+    let newMessage = { id: 5, message: state.dialogsPage.newMessage };
+    if (state.dialogsPage.newMessage !== 0) { state.dialogsPage.messages.push(newMessage) };
+    rerenderEntireTree();
+    state.dialogsPage.newMessage = "";
+  },
+  updateNewMessage  (messageText) {
+    state.dialogsPage.newMessage = messageText;
+    rerenderEntireTree();
+  },
+   subscribe  (observer) {
+    rerenderEntireTree = observer;
+  }
+}
+// export const addPost = () => {
+//   let newPost = { id: 5, message: state.profilePage.newPostText, likes: 9 };
+//   if (state.profilePage.newPostText.length !== 0) { state.profilePage.posts.push(newPost) };
+//   rerenderEntireTree();
+//   state.profilePage.newPostText = "";
+// };
+// export const updateNewPostText = (newText) => {
+//   state.profilePage.newPostText = newText;
+//   rerenderEntireTree();
+// };
+
+// export const sendMessage = () => {
+//   let newMessage = { id: 5, message: state.dialogsPage.newMessage };
+//   if (state.dialogsPage.newMessage !== 0) { state.dialogsPage.messages.push(newMessage) };
+//   rerenderEntireTree();
+//   state.dialogsPage.newMessage = "";
+// };
+// export const updateNewMessage = (messageText) => {
+//   state.dialogsPage.newMessage = messageText;
+//   rerenderEntireTree();
+// };
+// export const subscribe = (observer) => {
+//   rerenderEntireTree = observer;
+// }
