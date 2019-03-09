@@ -2,7 +2,39 @@
 .item {
   color: white;
 }
-.item img {
-  width: 30px;
-  border-radius: 5px;
+.newItem button {
+  padding: 7px 16px 8px;
+  margin-right: 5px;
+  font-size: 15px;
+  display: inline-block;
+  zoom: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  font-family: 'Playfair Display', serif;
+  vertical-align: top;
+  line-height: 15px;
+  text-align: center;
+  text-decoration: none;
+  background: none;
+  background-color: white;
+  color: #8706a1;
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  }
+.newItem {
+  padding-bottom : 20px;
+}
+.newItem textarea {
+  resize: none;
+}
+.addFile input {
+  visibility: hidden;
+}
+.addFile button {
+  visibility: hidden;
+}
+.buttons {
+  display: flex;
 }

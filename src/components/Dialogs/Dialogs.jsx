@@ -6,8 +6,8 @@ import MessageItem from './MessageItem/MessageItem';
 import {actionCreator} from '../../redux/state';
 
 const Dialogs = (props) => {
-  let dialogsElements = props.dialogs.dialogs.map(el => <DialogItem name={el.name} id={el.id} avatar={el.avatar} />);
-  let messageElements = props.dialogs.messages.map(el => <MessageItem message={el.message} />);
+  let dialogsElements = props.dialogs.dialogs.map((el,i) => <DialogItem key = {i} name={el.name} id={el.id} avatar={el.avatar} />);
+  let messageElements = props.dialogs.messages.map((el,i) => <MessageItem key = {i} message={el.message} />);
 
   let newMessageElement = React.createRef();
 

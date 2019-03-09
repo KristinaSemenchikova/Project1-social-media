@@ -8,7 +8,7 @@ const ProfileInfo = () => {
           <img src='https://hdqwalls.com/download/beautiful-mountains-wallpaper-2048x1152.jpg' />
         </div> */}
       <div className={s.avatar}>
-        <img src="https://cdn.images.express.co.uk/img/dynamic/128/590x/secondary/Cat4-430028.jpg" />
+        <img alt = 'avatar' src="https://cdn.images.express.co.uk/img/dynamic/128/590x/secondary/Cat4-430028.jpg" />
         <div className={s.description} > Soft Kitty </div>
       </div>
       

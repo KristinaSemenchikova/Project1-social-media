@@ -5,7 +5,7 @@ import {actionCreator} from '../../../redux/state';
 
 const MyPosts = (props) => {
 
-  let postElements = props.posts.map(item => <Post message={item.message} likes={item.likes} />);
+  let postElements = props.posts.map((item,i) => <Post key = {i} message={item.message} likes={item.likes} />);
 
   let newPostElement = React.createRef();
 

@@ -29,7 +29,14 @@ let store = {
         { id: 2, name: 'Ryan Reynolds', avatar: 'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAykO5L.img?h=317&w=624&m=6&q=60&o=f&l=f&x=1068&y=368' },
         { id: 3, name: 'Ryan Gosling', avatar: 'https://cdnph.upi.com/svc/sv/upi/6241487592217/2017/1/834a9c5065f23f503e786fddcf03fb43/Ryan-Gosling-Rooney-Mara-fall-in-love-in-first-trailer-for-Song-to-Song.jpg' },
       ]
+    },
+    newsPage: {
+      newsItem: [
+        { id: 1, newsItemText: 'look at my cute pom', img: 'https://pbs.twimg.com/media/DiUZj6fU0AUHf42.jpg', likes: 21 }
+      ],
+      newsText: 'Anything meow?'
     }
+
   },
   _callSubscriber() {
     console.log('State is changed')
@@ -63,7 +70,16 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-
+  _addNewNewItem() {
+    let newNewItem = { id: 2, newsItemText: this._state.newsPage.newsText, img: '', likes: 12 };
+    if (this._state.newsPage.newsText !== 0) { this._state.newsPage.newsItem.push(newNewItem) };
+    this._callSubscriber();
+    this._state.newsPage.newsText = "";
+  },
+  _updateNewNewsItemText(newsText) {
+    this._state.newsPage.newsText = newsText;
+    this._callSubscriber();
+  },
   dispatch(action) {
     if (action.type === 'ADD-POST') {
       this._addPost();
@@ -74,12 +90,16 @@ let store = {
     }
     else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
       this._updateNewMessage(action.text)
+    } else if (action.type === 'ADD-NEW-NEW-ITEM'){
+      this._addNewNewItem();
+    } else if (action.type === 'UPDATE-NEW-NEWS-ITEM-TEXT'){
+      this._updateNewNewsItemText(action.text);
     }
   }
 }
 
 
-export const actionCreator = (type, text ='text') => {
+export const actionCreator = (type, text) => {
   return ({
     type: type,
     text: text
