@@ -8,9 +8,7 @@ import store from './redux/state';
 
  let rerenderEntireTree = () => {
 ReactDOM.render(<BrowserRouter>
-<App state={store.getState.call(store)} addPost={store.addPost.bind(store)} 
-updateNewPostText = {store.updateNewPostText.bind(store)} 
-sendMessage = {store.sendMessage.bind(store)} updateNewMessage = {store.updateNewMessage.bind(store)}/>
+<App state={store.getState.call(store)} dispatch ={store.dispatch.bind(store)}/>
 </BrowserRouter>, document.getElementById('root'));
 }
 // store.subscribe method gets observer (function) as a parameter
