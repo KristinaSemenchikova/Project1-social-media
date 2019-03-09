@@ -1,4 +1,3 @@
-
 .item {
   padding-bottom: 20px;
   color: white;
@@ -6,3 +5,12 @@
 .item img {
   width: 500px;
 }
+.likeButton {
+  font-size: 18px;
+  vertical-align: middle;
+}
+.likeButton img {
+  width: 24px;
+  height: 24px;
+  background: no-repeat;
+  }

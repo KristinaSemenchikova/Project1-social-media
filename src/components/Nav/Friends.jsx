@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Friends = (props) => {
     return (
         <div>
-            <img src={props.avatar}> </img>
+            <img alt = 'avatar' src={props.avatar}> </img>
             {props.name}
         </div>
     )

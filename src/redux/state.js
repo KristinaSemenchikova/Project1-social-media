@@ -1,3 +1,7 @@
+import profileReducer from './profile-reducer';
+import dialogsReducer from './dialogs-reducer';
+import newsReducer from './news-reducer';
+
 let store = {
   _state: {
     profilePage: {
@@ -47,56 +51,13 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-  _addPost() {
-    let newPost = { id: 5, message: this._state.profilePage.newPostText, likes: 9 };
-    if (this._state.profilePage.newPostText.length !== 0) { this._state.profilePage.posts.push(newPost) };
-    this._callSubscriber();
-    this._state.profilePage.newPostText = "";
-  },
-  _updateNewPostText(newText) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber();
-  },
-  _sendMessage() {
-    let newMessage = { id: 5, message: this._state.dialogsPage.newMessage };
-    if (this._state.dialogsPage.newMessage !== 0) { this._state.dialogsPage.messages.push(newMessage) };
-    this._callSubscriber();
-    this._state.dialogsPage.newMessage = "";
-  },
-  _updateNewMessage(messageText) {
-    this._state.dialogsPage.newMessage = messageText;
-    this._callSubscriber();
-  },
-  subscribe(observer) {
-    this._callSubscriber = observer;
-  },
-  _addNewNewItem() {
-    let newNewItem = { id: 2, newsItemText: this._state.newsPage.newsText, img: '', likes: 12 };
-    if (this._state.newsPage.newsText !== 0) { this._state.newsPage.newsItem.push(newNewItem) };
-    this._callSubscriber();
-    this._state.newsPage.newsText = "";
-  },
-  _updateNewNewsItemText(newsText) {
-    this._state.newsPage.newsText = newsText;
-    this._callSubscriber();
-  },
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
-      this._addPost();
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-      this._updateNewPostText(action.text);
-    } else if (action.type === 'SEND-MESSAGE') {
-      this._sendMessage()
-    }
-    else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-      this._updateNewMessage(action.text)
-    } else if (action.type === 'ADD-NEW-NEW-ITEM'){
-      this._addNewNewItem();
-    } else if (action.type === 'UPDATE-NEW-NEWS-ITEM-TEXT'){
-      this._updateNewNewsItemText(action.text);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.newsPage = newsReducer(this._state.newsPage, action);
+    this._callSubscriber();
   }
-}
+};
 
 
 export const actionCreator = (type, text) => {
