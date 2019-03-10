@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import s from './Post.module.css';
 const Post = (props) => {
   let likePost = (e) => {
-    e.target.src = 'https://image.flaticon.com/icons/svg/291/291212.svg';
+    if (e.target.src !== 'https://image.flaticon.com/icons/svg/291/291212.svg') {
+      e.target.src = 'https://image.flaticon.com/icons/svg/291/291212.svg';
+    } else {
+      e.target.src = 'https://image.flaticon.com/icons/svg/66/66744.svg';
+    }
   };
   return (
     <div className={s.item}>
