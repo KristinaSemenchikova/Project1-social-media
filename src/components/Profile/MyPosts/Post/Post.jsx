@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import s from './Post.module.css';
+import PropTypes from 'prop-types';
+import {likePostActionCreator} from './../../../../redux/profile-reducer';
+import {unlikePostActionCreator} from './../../../../redux/profile-reducer';
+
 const Post = (props) => {
   let likePost = (e) => {
-    if (e.target.src !== 'https://image.flaticon.com/icons/svg/291/291212.svg') {
+     if (props.isLiked == false) {
       e.target.src = 'https://image.flaticon.com/icons/svg/291/291212.svg';
+      props.dispatch(likePostActionCreator(props.id));
     } else {
       e.target.src = 'https://image.flaticon.com/icons/svg/66/66744.svg';
+       props.dispatch(unlikePostActionCreator(props.id));
     }
   };
   return (
@@ -20,4 +26,8 @@ const Post = (props) => {
   )
 }
 
+Post.propTypes = {
+  likes: PropTypes.number,
+  message: PropTypes.string
+};
 export default Post;

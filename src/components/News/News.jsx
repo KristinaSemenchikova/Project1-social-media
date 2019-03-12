@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import s from './News.module.css';
 import NewsItem from './NewsItem/NewsItem';
-import { actionCreator } from '../../redux/state';
+import {addNewActionCreator,updateNewActionCreator } from './../../redux/news-reducer';
+
 
 const News = (props) => {
-    let newsElement = props.news.newsItem.map((item, i) => <NewsItem key={i} id={item.id} newsText={item.newsItemText} img={item.img} likes={item.likes} />);
+    let newsElement = props.news.newsItem.map((item, i) => <NewsItem isLiked = {item.isLiked} key={i} id={item.id} newsText={item.newsItemText} img={item.img} likes={item.likes} dispatch={props.dispatch} />);
     let addFile = React.createRef();
     let addFileButton = React.createRef();
     let clickOnFileButton = (e) => {
@@ -14,11 +15,11 @@ const News = (props) => {
         addFileButton.current.style.visibility = 'visible'
     };
     let addNew = () => {
-        props.dispatch(actionCreator('ADD-NEW-NEW-ITEM', 'ADD-NEW-NEW-ITEM'));
+        props.dispatch(addNewActionCreator());
     };
     let newsTextChange = (e) => {
         let newsText = e.target.value;
-        props.dispatch(actionCreator('UPDATE-NEW-NEWS-ITEM-TEXT', newsText));
+        props.dispatch(updateNewActionCreator(newsText));
     };
 
     return (

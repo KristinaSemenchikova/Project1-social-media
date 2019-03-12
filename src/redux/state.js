@@ -59,11 +59,4 @@ let store = {
   }
 };
 
-
-export const actionCreator = (type, text) => {
-  return ({
-    type: type,
-    text: text
-  })
-};
 export default store;

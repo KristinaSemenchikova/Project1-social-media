@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import s from './Nav.module.css';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Friends from './Friends';
 const Nav = (props) => {
-    // let friends = props.sidebar.friends.map(item =>  <Friends name =  {item.name} avatar = {item.avatar}  /> );
-   
+
     return (
         <nav className={s.nav}>
             <div className={`${s.item} + ${s.active}`}>
-                <NavLink to='/profile' activeClassName = {s.active}> Profile </NavLink>
+                <NavLink to='/profile' activeClassName={s.active}> Profile </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/dialogs' activeClassName = {s.active}> Messages </NavLink>
+                <NavLink to='/dialogs' activeClassName={s.active}> Messages </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/news' activeClassName = {s.active}> News </NavLink>
+                <NavLink to='/news' activeClassName={s.active}> News </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/music' activeClassName = {s.active}> Music </NavLink>
+                <NavLink to='/music' activeClassName={s.active}> Music </NavLink>
                 <div className={s.item}>
-                    <NavLink to='/settings' activeClassName = {s.active}> Settings </NavLink>
+                    <NavLink to='/settings' activeClassName={s.active}> Settings </NavLink>
                 </div>
             </div>
-            <div className={s.friends}> 
-                Friends
-               {/* {friends} */}
-           </div>
+            <div className={s.friends}>
+            </div>
         </nav>
     )
 }

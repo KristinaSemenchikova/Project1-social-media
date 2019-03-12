@@ -1,9 +1,10 @@
 .header {
-    grid-area: h;
-    background: linear-gradient(to right, #8706a1 0, #d40cdb 45%, #f004a9 70%, #f50e66 100%);
-   border-bottom: 2px solid black;
-  }
-  .header img {
-    width: 50px;
-    padding-left: 20px;
-  }
+  grid-area: h;
+  background: linear-gradient(to right, #8706a1 0, #d40cdb 45%, #f004a9 70%, #f50e66 100%);
+  border-bottom: 2px solid black;
+}
+
+.header img {
+  width: 50px;
+  padding-left: 20px;
+}

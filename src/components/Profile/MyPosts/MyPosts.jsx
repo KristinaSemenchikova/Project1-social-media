@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {actionCreator} from '../../../redux/state';
+import {addPostActionCreator,updatePostActionCreator} from './../../../redux/profile-reducer';
+import PropTypes from 'prop-types';
 
 const MyPosts = (props) => {
 
-  let postElements = props.posts.map((item,i) => <Post key = {i} message={item.message} likes={item.likes} />);
+  let postElements = props.posts.map((item,i) => <Post isLiked = {item.isLiked} id = {item.id} key = {i} message={item.message} likes={item.likes} dispatch={props.dispatch}/>);
 
   let newPostElement = React.createRef();
 
   let addPost = () => {
     // let text = newPostElement.current.value;
-      props.dispatch(actionCreator('ADD-POST','ADD-POST'));
+      props.dispatch(addPostActionCreator());
   }
   let onPostChange = (e) => {
     // let text = newPostElement.current.value;
     let text = e.target.value;
-      props.dispatch(actionCreator('UPDATE-NEW-POST-TEXT',text));
+      props.dispatch(updatePostActionCreator(text));
   };
 
 
@@ -34,6 +35,10 @@ const MyPosts = (props) => {
       </div>
     </div>
   )
-}
+};
 
+MyPosts.propTypes = {
+  post: PropTypes.array,
+  newPostText: PropTypes.string
+};
 export default MyPosts;
