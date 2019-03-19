@@ -4,7 +4,13 @@ let initialState = {
         { id: 2, message: 'Come and see my Instagram', likes: 17, isLiked: false }
     ],
     newPostText: 'Anything meow?',
-    statusText: 'Change status'
+    statusText: 'Change status',
+    profileInfo: {
+        name: 'Soft Kitty',
+        birthdayDate: '08.08.1998',
+        city: 'London',
+        contact: '+44 810 234 678 98 33'
+    }
 };
 
 const ADD_POST = 'ADD-POST';
@@ -12,7 +18,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_STATUS = 'ADD-STATUS';
 const UPDATE_STATUS_TEXT = 'UPDATE-STATUS-TEXT';
 const LIKE_POST = 'LIKE-POST';
-const UNLIKE_POST = 'UNLIKE-POST';
+const DISLIKE_POST = 'DISLIKE-POST';
 
 export const addPostActionCreator = () => {
     return ({
@@ -43,9 +49,9 @@ export const likePostActionCreator = (id) => {
         id: id,
     })
 };
-export const unlikePostActionCreator = (id) => {
+export const dislikePostActionCreator = (id) => {
     return ({
-        type: UNLIKE_POST,
+        type: DISLIKE_POST,
         id: id,
     })
 };
@@ -53,32 +59,56 @@ export const unlikePostActionCreator = (id) => {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
+            let newState;
             let newId = state.posts[state.posts.length - 1].id + 1;
             let newPost = { id: newId, message: state.newPostText, likes: 9, isLiked: false };
-            if (state.newPostText.length !== 0) { state.posts.push(newPost) };
-            state.newPostText = "";
-            return state;
+            //if (state.newPostText.length !== 0) { state.posts.push(newPost) };
+            newState = { ...state, posts: [newPost, ...state.posts] }
+            newState.newPostText = "";
+             return newState;
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.text;
-            return state;
+            newState = { ...state, newPostText: action.text }
+            //state.newPostText = action.text;
+            return newState;
         case ADD_STATUS:
-            state.statusText = action.text;
-            return state;
+            newState = { ...state, statusText: action.text }
+            // state.statusText = action.text;
+            return newState;
         case UPDATE_STATUS_TEXT:
-            state.statusText = action.text;
-            return state;
+            newState = { ...state, statusText: action.text }
+            // state.statusText = action.text;
+            return newState;
         case LIKE_POST:
-            let post = state.posts.filter((item) => item.id == action.id);
-            post[0].likes += 1;
-            post[0].isLiked = true;
-            return state;
-        case UNLIKE_POST:
-            post = state.posts.filter((item) => item.id == action.id);
-            post[0].likes -= 1;
-            post[0].isLiked = false;
-            return state;
+            newState = {
+                ...state, posts: [...state.posts]
+            };
+            let newStatePost = newState.posts.filter((item) => item.id == action.id);
+            newStatePost[0].likes += 1;
+            newStatePost[0].isLiked = true;
+            return newState;
+        case DISLIKE_POST:
+            newState = {
+                ...state, posts: [...state.posts]
+            };
+            newStatePost = newState.posts.filter((item) => item.id == action.id);
+            newStatePost[0].likes -= 1;
+            newStatePost[0].isLiked = false;
+            return newState;
         default:
             return state;
     }
 };
 export default profileReducer;
+// / state.newPostText = action.text;
+//             // return state;
+/*
+       case CHANGE_CURRENT_NOTE:
+       return {
+           ...state,
+           currentWritingNote: {
+               ...state.currentWritingNote,
+               text: action.text
+           }
+       };
+       */
+

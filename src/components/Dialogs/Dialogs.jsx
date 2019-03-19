@@ -12,20 +12,18 @@ const Dialogs = (props) => {
   let newMessageElement = React.createRef();
 
   let send = () => {
-    // let message = newMessageElement.current.value;
     props.dispatch(sendMessageActionCreator());
   };
   let onMessageChange = (e) => {
-    // let message = newMessageElement.current.value;
     let message = e.target.value;
     props.dispatch(updateMessageTextActionCreator(message));
   };
   return (
     <div className={s.dialogs}>
-      <div className={s.dialogsItem}>
+      <div className={s.dialogsItem} activeClassName={s.active}>
         {dialogsElements}
       </div>
-      <div className={s.messages}>
+      <div className={s.messages} >
         {messageElements}
       </div>
       <div>

@@ -1,18 +1,55 @@
-.avatar {
+.profileInfo {
   display: grid;
   grid-template-columns: 1fr 6fr;
+
 }
-.avatar img {
+.profileInfo img {
   height: 150px;
   border-radius: 10px;
 }
 .description {
   display: flex;
   flex-direction: column;
+  margin: 0 10px 0 10px;
 }
-.description span {
+.description .status {
   font-size: 17px;
 }
 .setStatus {
   display: none;
+  height: 30px;
+  }
+.setStatus button {
+  padding: 7px 16px 8px;
+  margin-right: 5px;
+  font-size: 15px;
+  display: inline-block;
+  zoom: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  font-family: 'Playfair Display', serif;
+  vertical-align: top;
+  line-height: 15px;
+  text-align: center;
+  text-decoration: none;
+  background: none;
+  background-color: #9e7cfc; 
+  color: white; 
+  border: 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.info {
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+ }
+.infoData {
+  color: rgb(68, 0, 255);
+}
+.status {
+  color: #9e7cfc;
+  height: 30px;
 }

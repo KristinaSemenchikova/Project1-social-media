@@ -21,12 +21,12 @@
 .message {
     margin: 10px;
 } 
-.active {
-    color: red;
+.dialogsItem a.active {
+  color: #9e7cfc
 }
 button {
   padding: 7px 16px 8px;
-  margin: 0;
+  margin-right: 5px;
   font-size: 15px;
   display: inline-block;
   zoom: 1;
@@ -39,8 +39,8 @@ button {
   text-align: center;
   text-decoration: none;
   background: none;
-  background-color: white;
-  color: #8706a1;
+  background-color: #9e7cfc; 
+  color: white; 
   border: 0;
   border-radius: 4px;
   box-sizing: border-box;

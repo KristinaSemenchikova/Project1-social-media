@@ -1,10 +1,12 @@
 .nav {
   grid-area: n;
-  /* background: linear-gradient(to right, #8706a1 0, #d40cdb 100%);  */
-  padding: 10px 20px ;
-  height: 500px;
+  background-color: #94c5e6;
+  padding: 10px 20px;
+  margin: 10px 0px 10px 50px;
+  height: 250px;
+  border-radius: 10px;
   text-align: center;
-  color:#3E5196;
+  color: #ad7cfc;
 }
 
 .item {
@@ -15,16 +17,18 @@
   text-decoration: none;
   color: white;
 }
+
 .item a.active {
-  color: red;
+  color: rgb(68, 0, 255);
 }
+
 .friends {
- margin-top: 40px; 
+  margin-top: 40px;
 }
+
 .friends img {
   width: 40px;
   height: 40px;
   border-radius: 10px;
   margin-right: 5px;
 }
-

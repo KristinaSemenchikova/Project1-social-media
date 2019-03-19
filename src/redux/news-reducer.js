@@ -9,7 +9,7 @@ let initialState = {
 const ADD_NEW_NEW_ITEM = 'ADD-NEW-NEW-ITEM';
 const UPDATE_NEW_NEWS_ITEM_TEXT = 'UPDATE-NEW-NEWS-ITEM-TEXT';
 const LIKE_NEWS = 'LIKE-NEWS';
-const UNLIKE_NEWS = 'UNLIKE-NEWS';
+const DISLIKE_NEWS = 'DISLIKE-NEWS';
 
 export const likeNewsActionCreator = (id) => {
     return ({
@@ -17,9 +17,9 @@ export const likeNewsActionCreator = (id) => {
         id: id,
     })
 };
-export const unlikeNewsActionCreator = (id) => {
+export const dislikeNewsActionCreator = (id) => {
     return ({
-        type: UNLIKE_NEWS,
+        type: DISLIKE_NEWS,
         id: id,
     })
 };
@@ -51,7 +51,7 @@ const newsReducer = (state = initialState, action) => {
             news[0].likes += 1;
             news[0].isLiked = true;
             return state;
-        case UNLIKE_NEWS:
+        case DISLIKE_NEWS:
             news = state.newsItem.filter((item) => item.id == action.id);
             news[0].likes -= 1;
             news[0].isLiked = false;
