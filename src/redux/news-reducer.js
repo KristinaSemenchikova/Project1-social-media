@@ -1,5 +1,3 @@
-import NewsItem from "../components/News/NewsItem/NewsItem";
-
 let initialState = {
     newsItem: [
         { id: 1, newsItemText: 'look at my cute pom', img: 'https://pbs.twimg.com/media/DiUZj6fU0AUHf42.jpg', likes: 21, isLiked: false }
@@ -38,24 +36,31 @@ export const updateNewActionCreator = (text) => {
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEW_NEW_ITEM:
-            let newId = state.newsItem[state.newsItem.length - 1].id + 1;
-            let newNewItem = { id: newId, newsItemText: state.newsText, img: '', likes: 12, isLiked: false };
-            if (state.newsText.length !== 0) { state.newsItem.push(newNewItem) };
-            state.newsText = "";
-            return state;
+            let newState;
+            let newId = state.newsItem[0].id + 1;
+            if (/\S/.test(state.newsText)) {
+                let newNewItem = { id: newId, newsItemText: state.newsText, img: '', likes: 12, isLiked: false };
+                newState = { ...state, newsItem: [newNewItem, ...state.newsItem] }
+                newState.newsText = "";
+                return newState;
+            } else {
+                return state
+            };
         case UPDATE_NEW_NEWS_ITEM_TEXT:
-            state.newsText = action.text;
-            return state;
+            newState = { ...state, newsText: action.text };
+            return newState;
         case LIKE_NEWS:
-            let news = state.newsItem.filter((item) => item.id == action.id);
-            news[0].likes += 1;
-            news[0].isLiked = true;
-            return state;
+            newState = { ...state, newsItem: [...state.newsItem] }
+            let newStateNewItem = newState.newsItem.filter((item) => item.id == action.id);
+            newStateNewItem[0].likes += 1;
+            newStateNewItem[0].isLiked = true;
+            return newState;
         case DISLIKE_NEWS:
-            news = state.newsItem.filter((item) => item.id == action.id);
-            news[0].likes -= 1;
-            news[0].isLiked = false;
-            return state;
+            newState = { ...state, newsItem: [...state.newsItem] }
+            newStateNewItem = newState.newsItem.filter((item) => item.id == action.id);
+            newStateNewItem[0].likes -= 1;
+            newStateNewItem[0].isLiked = false;
+            return newState;
 
         default: return state;
     }

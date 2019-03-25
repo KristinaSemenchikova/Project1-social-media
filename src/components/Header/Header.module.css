@@ -1,6 +1,7 @@
 .header {
   grid-area: h;
-  /* background: linear-gradient(to right, #8706a1 0, #d40cdb 45%, #f004a9 70%, #f50e66 100%); */
+  position: fixed;
+  width: 100%;
   background: linear-gradient(to bottom, #ad7cfc 0, #94c5e6 100%);
   border-bottom: 1px solid #ad7cfc;
   display: flex;
@@ -36,4 +37,7 @@
   margin: 0;
   padding: 5px 10px 5px 10px;
   font-size: smaller;
+}
+.settingsMenu ul a  {
+ text-decoration: none;
 }

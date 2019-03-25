@@ -5,7 +5,34 @@ import Dialogs from './Dialogs';
 
 const DialogsContainer = (props) => {
     return (
-    <Dialogs/>
+    <Dialogs 
+    newMessage = {props.newMessage}
+    dialogs ={props.dialogs}
+    messages = {props.messages}
+    onMessageChange = {props.onMessageChange}
+    onSend = {props.onSend}
+    />
   )
 };
-export default DialogsContainer;
+
+const mapStateToProps = state => {
+  return {
+    newMessage: state.dialogsPage.newMessage,
+    dialogs: state.dialogsPage.dialogs,
+    messages:  state.dialogsPage.messages
+  }
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onMessageChange: (message) => {
+      dispatch(updateMessageTextActionCreator(message))
+    },
+    onSend: () => {
+      dispatch(sendMessageActionCreator())
+    }
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(DialogsContainer);
+
+

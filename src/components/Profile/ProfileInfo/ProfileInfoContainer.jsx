@@ -10,7 +10,6 @@ const ProfileInfoContainer = (props) => {
     status={props.status} 
     addStatus = {props.addStatus}
     updateStatus = {props.updateStatus} />
-
   )
 }
 const mapStateToProps = (state) => {

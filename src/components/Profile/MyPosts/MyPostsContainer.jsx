@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { addPostActionCreator, updatePostActionCreator, likePostActionCreator, dislikePostActionCreator } from '../../../redux/profile-reducer';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
 

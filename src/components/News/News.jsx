@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import s from './News.module.css';
 import NewsItem from './NewsItem/NewsItem';
-import {addNewActionCreator,updateNewActionCreator } from './../../redux/news-reducer';
-
+import PropTypes from 'prop-types';
 
 const News = (props) => {
-    let newsElement = props.news.newsItem.map((item, i) => <NewsItem isLiked = {item.isLiked} key={i} id={item.id} newsText={item.newsItemText} img={item.img} likes={item.likes} dispatch={props.dispatch} />);
+    let newsElement = props.newsItem.map((item, i) => <NewsItem isLiked={item.isLiked} key={i} id={item.id} newsText={item.newsItemText} img={item.img} likes={item.likes} onLike={props.onLike} onDislike={props.onDislike} />);
     let addFile = React.createRef();
     let addFileButton = React.createRef();
+
     let clickOnFileButton = (e) => {
         addFile.current.click();
     };
@@ -15,11 +15,11 @@ const News = (props) => {
         addFileButton.current.style.visibility = 'visible'
     };
     let addNew = () => {
-        props.dispatch(addNewActionCreator());
+        props.onAddNew();
     };
     let newsTextChange = (e) => {
         let newsText = e.target.value;
-        props.dispatch(updateNewActionCreator(newsText));
+        props.onChangeNew(newsText);
     };
 
     return (
@@ -28,7 +28,7 @@ const News = (props) => {
             {newsElement}
             <div className={s.newItem}>
                 <div>
-                    <textarea cols="69" rows="3" onFocus={showFileButton} onChange={newsTextChange} value={props.news.newsText} />
+                    <textarea cols="69" rows="3" onFocus={showFileButton} onChange={newsTextChange} value={props.newsText} />
                 </div>
                 <div className={s.buttons}>
                     <button onClick={addNew} > Add new </button>
@@ -41,4 +41,12 @@ const News = (props) => {
         </div>
     )
 }
+News.propTypes = {
+    newsItem: PropTypes.array,
+    newsText: PropTypes.string,
+    onLike: PropTypes.func,
+    onDislike: PropTypes.func,
+    onChangeNew: PropTypes.func,
+    onAddNew: PropTypes.func
+};
 export default News;

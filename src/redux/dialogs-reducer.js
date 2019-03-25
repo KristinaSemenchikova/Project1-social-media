@@ -31,14 +31,20 @@ export const updateMessageTextActionCreator = (text) => {
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
+      let newState;
       let newId = state.messages[state.messages.length - 1].id + 1;
-      let newMessage = { id:  newId, message: state.newMessage };
-      if (state.newMessage.length !== 0) { state.messages.push(newMessage) };
-      state.newMessage = "";
-      return state;
+      if (/\S/.test(state.newMessage)) {
+        let newMessage = { id: newId, message: state.newMessage };
+        // if (state.newMessage.length !== 0) { state.messages.push(newMessage) };
+        newState = { ...state, messages: [newMessage, ...state.messages] }
+        newState.newMessage = "";
+        return newState;
+      } else {
+        return state;
+      }
     case UPDATE_NEW_MESSAGE_TEXT:
-      state.newMessage = action.text;
-      return state;
+      newState = { ...state, newMessage: action.text };
+      return newState;
     default:
       return state;
   }

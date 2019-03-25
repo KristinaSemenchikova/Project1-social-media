@@ -23,9 +23,9 @@ const SettingsMenu = () => {
             </a>
             <div className={s.settingsMenu} ref={settingsMenu}>
                 <ul>
-                    <li> My page</li>
-                    <li> Edit profile</li>
-                    <li> Settings</li>
+                    <li> <a href = '#'> My page </a></li>
+                    <li> <a href = '#'> Edit profile</a></li>
+                    <li> <a href = '#'>  Settings</a></li>
                 </ul>
             </div>
         </>

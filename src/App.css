@@ -1,4 +1,5 @@
 .app-wrapper {
+     min-height: 100vh;
      background: rgb(236, 240, 243);
      /* background: linear-gradient(to right, #8706a1 0, #d40cdb 45%, #f004a9 70%, #f50e66 100%); */
      padding: 0 ;

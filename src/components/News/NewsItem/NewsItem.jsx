@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import s from './NewsItem.module.css';
 import PropTypes from 'prop-types';
-import {likeNewsActionCreator, dislikeNewsActionCreator} from './../../../redux/news-reducer';
 
 const NewsItem = (props) => {
   let likePost = (e) => {
     if (props.isLiked == false) {
       e.target.src = 'https://image.flaticon.com/icons/svg/291/291212.svg';
-      props.dispatch(likeNewsActionCreator(props.id));
+      props.onLike(props.id);
     } else {
       e.target.src = 'https://image.flaticon.com/icons/svg/66/66744.svg';
-       props.dispatch(dislikeNewsActionCreator(props.id));
+       props.onDislike(props.id);
     }
   };
   return (

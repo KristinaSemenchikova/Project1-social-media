@@ -1,16 +1,21 @@
+import { strict } from "assert";
+
 let initialState = {
     posts: [
         { id: 1, message: 'Hi,sweety', likes: 10, isLiked: false },
-        { id: 2, message: 'Come and see my Instagram', likes: 17, isLiked: false }
     ],
     newPostText: 'Anything meow?',
     statusText: 'Change status',
     profileInfo: {
         name: 'Soft Kitty',
-        birthdayDate: '08.08.1998',
+        birthDate: '08.08.1998',
         city: 'London',
-        contact: '+44 810 234 678 98 33'
-    }
+        contact: '+44 810 234 678 98 33',
+    },
+    newName: '',
+    newBirthDate: '',
+    newCity: '',
+    newContact: '',
 };
 
 const ADD_POST = 'ADD-POST';
@@ -19,6 +24,11 @@ const ADD_STATUS = 'ADD-STATUS';
 const UPDATE_STATUS_TEXT = 'UPDATE-STATUS-TEXT';
 const LIKE_POST = 'LIKE-POST';
 const DISLIKE_POST = 'DISLIKE-POST';
+const CHANGE_NAME = 'CHANGE-NAME';
+const CHANGE_BIRTH = 'CHANGE-BIRTH';
+const CHANGE_CITY = 'CHANGE-CITY';
+const CHANGE_CONTACT = 'CHANGE-CONTACT';
+const ADD_INFO = 'ADD-INFO'
 
 export const addPostActionCreator = () => {
     return ({
@@ -55,29 +65,64 @@ export const dislikePostActionCreator = (id) => {
         id: id,
     })
 };
+export const changeNameActionCreator = (text) => {
+    return ({
+        type: CHANGE_NAME,
+        text: text,
+    })
+};
+export const changeBirthActionCreator = (text) => {
+    return ({
+        type: CHANGE_BIRTH,
+        text: text,
+    })
+};
+export const changeCityActionCreator = (text) => {
+    return ({
+        type: CHANGE_CITY,
+        text: text,
+    })
+};
+export const changeContactActionCreator = (text) => {
+    return ({
+        type: CHANGE_CONTACT,
+        text: text,
+    })
+};
+export const addInfoActionCreator = () => {
+    return ({
+        type: ADD_INFO,
+    })
+};
+
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newState;
-            let newId = state.posts[state.posts.length - 1].id + 1;
-            let newPost = { id: newId, message: state.newPostText, likes: 9, isLiked: false };
-            //if (state.newPostText.length !== 0) { state.posts.push(newPost) };
-            newState = { ...state, posts: [newPost, ...state.posts] }
-            newState.newPostText = "";
-             return newState;
+            let newId = state.posts[0].id + 1;
+            if (/\S/.test(state.newPostText)) {
+                let newPost = { id: newId, message: state.newPostText, likes: 9, isLiked: false };
+                newState = { ...state, posts: [newPost, ...state.posts] }
+                newState.newPostText = "";
+                return newState;
+            } else {
+                return state;
+            }
         case UPDATE_NEW_POST_TEXT:
             newState = { ...state, newPostText: action.text }
             //state.newPostText = action.text;
             return newState;
         case ADD_STATUS:
-            newState = { ...state, statusText: action.text }
-            // state.statusText = action.text;
-            return newState;
+            if (/\S/.test(state.statusText)) {
+                newState = { ...state, statusText: [state.statusText] };
+                return newState;
+            } else {
+                return state;
+            }
         case UPDATE_STATUS_TEXT:
-            newState = { ...state, statusText: action.text }
-            // state.statusText = action.text;
-            return newState;
+                newState = { ...state, statusText: action.text };
+                return newState;
         case LIKE_POST:
             newState = {
                 ...state, posts: [...state.posts]
@@ -93,6 +138,45 @@ const profileReducer = (state = initialState, action) => {
             newStatePost = newState.posts.filter((item) => item.id == action.id);
             newStatePost[0].likes -= 1;
             newStatePost[0].isLiked = false;
+            return newState;
+        case CHANGE_NAME:
+            newState = { ...state, newName: action.text };
+            return newState;
+        case CHANGE_BIRTH:
+            newState = { ...state, newBirthDate: action.text };
+            return newState;
+        case CHANGE_CITY:
+            newState = { ...state, newCity: action.text };
+            return newState;
+        case CHANGE_CONTACT:
+            newState = { ...state, newContact: action.text };
+            return newState;
+        case ADD_INFO:
+            newState = { ...state, profileInfo: { ...state.profileInfo } };
+            if (!(/\S/.test(state.newName)) && state.newName.length < 5) {
+                newState.profileInfo.name = state.profileInfo.name
+            }
+            else {
+                newState.profileInfo.name = state.newName
+            };
+            if (!(/\S/.test(state.newBirthDate)) && state.newBirthDate.length < 5) {
+                newState.profileInfo.birthDate = state.profileInfo.birthDate
+            }
+            else {
+                newState.profileInfo.birthDate = state.newBirthDate
+            };
+            if (!(/\S/.test(state.newCity)) && state.newCity.length < 3) {
+                newState.profileInfo.city = state.profileInfo.city
+            }
+            else {
+                newState.profileInfo.city = state.newCity
+            };
+            if (!(/\S/.test(state.newContact)) && state.newContact.length < 5) {
+                newState.profileInfo.contact = state.profileInfo.contact
+            }
+            else {
+                newState.profileInfo.contact = state.newContact
+            };
             return newState;
         default:
             return state;

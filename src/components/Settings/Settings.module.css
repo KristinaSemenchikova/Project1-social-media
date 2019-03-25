@@ -1,8 +1,16 @@
-
-.item {
-  color: white;
+.editInfo {
+  display: grid;
+  grid-template-columns: 20% 30%;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". ." ". ." ". ." ". .""   .";
 }
-.item img {
-  width: 30px;
-  border-radius: 5px;
+.editInfo :nth-child(odd) {
+  margin: 5px;
+  font-size: 90%;
+}
+.editInfo :nth-child(even) {
+  margin: 5px;
+}
+.editInfo button {
+  margin: 0;
 }

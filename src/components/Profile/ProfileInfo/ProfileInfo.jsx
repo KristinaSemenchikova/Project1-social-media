@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
   };
   let saveStatus = () => {
     statusField.current.style.display = 'none';
- status.current.style.display = 'inline';
+    status.current.style.display = 'inline';
     let text = statusArea.current.value;
     props.addStatus(text);
   };
@@ -33,7 +33,7 @@ const ProfileInfo = (props) => {
           <button onClick={saveStatus}>Save</button>
         </div>
         <div className={s.info}>
-          <span> Date of birth: <span className={s.infoData}> {props.info.birthdayDate} </span> </span>
+          <span> Date of birth: <span className={s.infoData}> {props.info.birthDate} </span> </span>
           <span> City: <span className={s.infoData}> {props.info.city}</span> </span>
           <span> Contact: <span className={s.infoData}>{props.info.contact} </span>  </span>
         </div>
