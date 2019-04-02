@@ -4,7 +4,7 @@ import NewsItem from './NewsItem/NewsItem';
 import PropTypes from 'prop-types';
 
 const News = (props) => {
-    let newsElement = props.newsItem.map((item, i) => <NewsItem isLiked={item.isLiked} key={i} id={item.id} newsText={item.newsItemText} img={item.img} likes={item.likes} onLike={props.onLike} onDislike={props.onDislike} />);
+    let newsElement = props.newsItem.map((item) => <NewsItem isLiked={item.isLiked} key={item.id} id={item.id} newsText={item.newsItemText} img={item.img} likes={item.likes} onLike={props.onLike} onDislike={props.onDislike} />);
     let addFile = React.createRef();
     let addFileButton = React.createRef();
 

@@ -3,28 +3,45 @@
   margin: 15px 0 15px 0;
   flex-direction: column;
 }
+
 .album a {
   color: rgb(68, 0, 255);
   font-size: 17px;
   text-decoration: none;
 }
+
 .album img {
+  width: 150px;
   height: 150px;
+  object-fit: cover;
   margin: 5px;
 }
+
 .view {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
+  justify-content: center;
   visibility: hidden;
-  background: rgb(236, 240, 243);
-  border-radius: 5%;
-  padding: 30px;
-  position: absolute;
+  background-color: rgba(0,0,0,0.65);
+  position: fixed;
   z-index: 1000;
   /* left:25%;  */
-  justify-self: center;
-  top: 50px;
+  /* justify-self: center; */
+  top: 0;
+  left: 0;
 }
+
 .view img {
- height: 500px;
+  margin: 10px;
+  height: 90%;
+  width:90%;
+  object-fit: contain;
+}
+.view button {
+  opacity: 0.5;
+}
+.view button:hover {
+  opacity: 1;
 }

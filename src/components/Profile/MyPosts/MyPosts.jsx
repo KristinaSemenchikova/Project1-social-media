@@ -7,7 +7,7 @@ const MyPosts = (props) => {
   let postElements = props.posts.map((item, i) => <Post
     isLiked={item.isLiked}
     id={item.id}
-    key={i}
+    key={item.id}
     message={item.message}
     likes={item.likes}
     onLike={props.onLike}

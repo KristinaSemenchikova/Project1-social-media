@@ -5,8 +5,8 @@ import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessageItem/MessageItem';
 
 const Dialogs = (props) => {
-  let dialogsElements = props.dialogs.map((el,i) => <DialogItem key = {i} name={el.name} id={el.id} avatar={el.avatar} />);
-  let messageElements = props.messages.map((el,i) => <MessageItem key = {i} message={el.message} />);
+  let dialogsElements = props.dialogs.map((el) => <DialogItem key = {el.id} name={el.name} id={el.id} avatar={el.avatar} />);
+  let messageElements = props.messages.map((el) => <MessageItem key = {el.id} message={el.message} />);
 
   let newMessageElement = React.createRef();
 
