@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
-import News from './components/News/News';
 import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NewsContainer from './components/News/NewsContainer';
 import SettingsContainer from './components/Settings/SettingsContainer';
 import Login from './components/LoginLogout/LoginPage';
+import AlbumContainer from './components/Profile/ProfileAlbum/AlbumContainer';
 
 
 const App = (props) => {
@@ -26,7 +24,8 @@ const App = (props) => {
         <Route path='/news' render={() => <NewsContainer />} />
         <Route path='/music' render={() => <Music />} />
         <Route path='/settings' render={() => <SettingsContainer />} />
-        <Route path = '/login' render = {() => <Login/>}/>
+        <Route path = '/login' render = {() => <Login/>} />
+        <Route path = '/album' render = {() => <AlbumContainer/>} />
         </Switch>
       </div>
     </div>

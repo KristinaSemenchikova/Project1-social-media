@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import s from './MessageItem.module.css';
 import { NavLink } from "react-router-dom";
 

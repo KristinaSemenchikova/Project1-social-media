@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import s from './News.module.css';
 import NewsItem from './NewsItem/NewsItem';
 import PropTypes from 'prop-types';

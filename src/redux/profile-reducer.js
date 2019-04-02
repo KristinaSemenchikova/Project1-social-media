@@ -1,9 +1,14 @@
-import { strict } from "assert";
-
 let initialState = {
     posts: [
         { id: 1, message: 'Hi,sweety', likes: 10, isLiked: false },
     ],
+    photos: ['https://pp.userapi.com/c849224/v849224463/1445b1/JmXx42sIXe8.jpg',
+        'https://pp.userapi.com/c845416/v845416462/1a9436/VeTZRXDWGug.jpg',
+        'https://pp.userapi.com/c846217/v846217810/18cb64/EZr0kU2S-Lg.jpg',
+        'https://pp.userapi.com/c639226/v639226781/3a1b/wN6vYbtvB6c.jpg',
+        'https://pp.userapi.com/c852016/v852016106/8c407/06xlRxvkVV8.jpg',
+        'https://pp.userapi.com/c635100/v635100700/2ad7d/qlKjSHHdBDc.jpg',
+        'https://pp.userapi.com/c845520/v845520822/12b348/lYTDXTByG_A.jpg'],
     newPostText: 'Anything meow?',
     statusText: 'Change status',
     profileInfo: {
@@ -95,7 +100,6 @@ export const addInfoActionCreator = () => {
     })
 };
 
-
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
@@ -121,8 +125,8 @@ const profileReducer = (state = initialState, action) => {
                 return state;
             }
         case UPDATE_STATUS_TEXT:
-                newState = { ...state, statusText: action.text };
-                return newState;
+            newState = { ...state, statusText: action.text };
+            return newState;
         case LIKE_POST:
             newState = {
                 ...state, posts: [...state.posts]
@@ -183,16 +187,3 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 export default profileReducer;
-// / state.newPostText = action.text;
-//             // return state;
-/*
-       case CHANGE_CURRENT_NOTE:
-       return {
-           ...state,
-           currentWritingNote: {
-               ...state.currentWritingNote,
-               text: action.text
-           }
-       };
-       */
-

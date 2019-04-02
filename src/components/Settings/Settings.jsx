@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import s from './Settings.module.css';
+import React from 'react'
 
 const Settings = (props) => {
     let onChangeName = (e) => {
@@ -38,3 +38,5 @@ const Settings = (props) => {
     )
 }
 export default Settings;
+
+

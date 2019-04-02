@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import {addNewActionCreator, updateNewActionCreator,likeNewsActionCreator, dislikeNewsActionCreator } from '../../redux/news-reducer';
+import {newsText, newsItem} from './/../../redux/selectors';
 import News from './News';
 
 const NewsContainer = (props) => {
@@ -17,8 +18,8 @@ const NewsContainer = (props) => {
 }
 const mapStateToProps = (state) => {
     return ( {
-        newsText: state.newsPage.newsText,
-        newsItem: state.newsPage.newsItem
+        newsText: newsText(state),
+        newsItem: newsItem(state)
     } )
 }
 const mapDispatchToProps = (dispatch) => {

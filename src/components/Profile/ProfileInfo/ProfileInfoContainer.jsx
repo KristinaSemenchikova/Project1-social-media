@@ -2,6 +2,7 @@ import React from 'react';
 import { addStatusActionCreator, updateStatusActionCreator } from '../../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo';
+import {info, status} from './../../../redux/selectors';
 
 const ProfileInfoContainer = (props) => {
   return (
@@ -14,8 +15,8 @@ const ProfileInfoContainer = (props) => {
 }
 const mapStateToProps = (state) => {
   return {
-    info : state.profilePage.profileInfo, 
-    status:  state.profilePage.statusText
+    info : info(state), 
+    status:  status(state)
   }
 };
 const mapDispatchToProps = (dispatch) => {

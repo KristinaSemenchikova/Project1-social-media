@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import s from './Dialogs.module.css';
 import PropTypes from 'prop-types';
 import DialogItem from './DialogItem/DialogItem';

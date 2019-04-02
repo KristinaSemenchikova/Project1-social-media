@@ -9,7 +9,6 @@ const SettingsMenu = () => {
         if (isOpenMenu == false) {
             setIsOpenMenu(true);
             settingsMenu.current.style.display = 'block';
-
         } else {
             setIsOpenMenu(false);
             settingsMenu.current.style.display = 'none';
@@ -25,7 +24,7 @@ const SettingsMenu = () => {
                 <ul>
                     <li> <a href = '#'> My page </a></li>
                     <li> <a href = '#'> Edit profile</a></li>
-                    <li> <a href = '#'>  Settings</a></li>
+                    <li> <a href = '#'> Settings</a></li>
                 </ul>
             </div>
         </>

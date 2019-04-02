@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import {changeNameActionCreator,changeBirthActionCreator,changeContactActionCreator, changeCityActionCreator,addInfoActionCreator} from './../../redux/profile-reducer';
-
+import {name, birthdayDate,city,contact} from './../../redux/selectors';
 const SettingsContainer = (props) => {
     
     return (
@@ -21,10 +21,10 @@ const SettingsContainer = (props) => {
 }
 const mapStateToProps = (state) => {
     return ( {
-        name: state.profilePage.newName,
-        birthdayDate: state.profilePage.newBirthDate,
-        city: state.profilePage.profileInfo.newCity,
-        contact: state.profilePage.profileInfo.newContact,   
+        name: name(state),
+        birthdayDate: birthdayDate(state),
+        city: city(state),
+        contact: contact(state),   
     } )
 }
 const mapDispatchToProps = (dispatch) => {

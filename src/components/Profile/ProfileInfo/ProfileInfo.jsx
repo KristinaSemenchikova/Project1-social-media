@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import s from './ProfileInfo.module.css';
 import PropTypes from 'prop-types';
 
@@ -48,4 +48,3 @@ ProfileInfo.propTypes = {
   updateStatus: PropTypes.func
 };
 export default ProfileInfo;
-

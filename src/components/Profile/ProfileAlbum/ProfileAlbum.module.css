@@ -1,0 +1,30 @@
+.album {
+  display: flex;
+  margin: 15px 0 15px 0;
+  flex-direction: column;
+}
+.album a {
+  color: rgb(68, 0, 255);
+  font-size: 17px;
+  text-decoration: none;
+}
+.album img {
+  height: 150px;
+  margin: 5px;
+}
+.view {
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  background: rgb(236, 240, 243);
+  border-radius: 5%;
+  padding: 30px;
+  position: absolute;
+  z-index: 1000;
+  /* left:25%;  */
+  justify-self: center;
+  top: 50px;
+}
+.view img {
+ height: 500px;
+}
