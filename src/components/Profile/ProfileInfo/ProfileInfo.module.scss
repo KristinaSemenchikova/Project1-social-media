@@ -1,0 +1,36 @@
+@import './../../Styles/variables.module.scss';
+
+.profileInfo {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+
+}
+.profileInfo img {
+  height: 200px;
+  border-radius: 10px;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px 0 10px;
+}
+.description .status {
+  font-size: 17px;
+}
+.setStatus {
+  display: none;
+  height: 30px;
+  }
+.info {
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+ }
+.infoData {
+  color: $anchor;
+}
+.status {
+  color: $colorTheme;
+  height: 30px;
+}

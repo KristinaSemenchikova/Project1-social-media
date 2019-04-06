@@ -1,0 +1,47 @@
+@import './../src/components/Styles/borderStyle.module';
+@import './../src/components/Styles/variables.module';
+.app-wrapper {
+     min-height: 100vh;
+     background: rgb(236, 240, 243);
+     /* background: linear-gradient(to right, #8706a1 0, #d40cdb 45%, #f004a9 70%, #f50e66 100%); */
+     padding: 0 ;
+     display: grid;
+     grid-template-rows: 60px 12fr;
+     grid-template-columns: 1fr 10fr;
+     grid-template-areas: "h  h " " n c ";
+     font-family: 'Playfair Display', serif;
+     font-size: 21px;
+     letter-spacing: 2px;
+     
+}
+.app-wrapper-content {
+     grid-area: c;
+     color: black;
+     background-color: #f9fbfc;
+     border-radius: 10px;
+     padding: 7px 50px ;
+     margin: 10px 50px 10px 10px;
+     height: auto;
+
+}
+button {
+     padding: 7px 16px 8px;
+     margin: 0;
+     font-size: 15px;
+     display: inline-block;
+     zoom: 1;
+     cursor: pointer;
+     white-space: nowrap;
+     outline: none;
+     font-family: 'Playfair Display', serif;
+     vertical-align: top;
+     line-height: 15px;
+     text-align: center;
+     text-decoration: none;
+     background: none;
+     background-color: $colorTheme; 
+     color: white; 
+     border: 0;
+     @include border-radius(4px);
+     box-sizing: border-box;
+     }

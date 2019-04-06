@@ -1,0 +1,8 @@
+@import './../../Styles/_postStyle.module.scss';
+
+.newPost {
+  @include post;
+}
+.newPost textarea {
+  @include textarea;
+}

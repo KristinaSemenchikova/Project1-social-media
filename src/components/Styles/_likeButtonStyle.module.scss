@@ -1,0 +1,9 @@
+@mixin likeButton {
+  font-size: 18px;
+  vertical-align: middle;
+}
+@mixin likeButtonImg {
+  width: 24px;
+  height: 24px;
+  background: no-repeat;
+}

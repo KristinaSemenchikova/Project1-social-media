@@ -1,0 +1,21 @@
+@import './../../../Styles/postStyle.module';
+@import './../../../Styles/likeButtonStyle.module';
+@import './../../../Styles/borderStyle.module';
+.item {
+  padding: 5px;
+  margin: 5px 0px 0px 0px;
+  @include border-radius(5px);
+}
+
+.item img {
+ @include postAvatar;
+}
+
+.likeButton img {
+  @include likeButtonImg;
+  border-radius: 1px;
+}
+
+.likeButton {
+  @include likeButton;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './NewsItem.module.css';
+import s from './NewsItem.module.scss';
 import PropTypes from 'prop-types';
 
 const NewsItem = (props) => {

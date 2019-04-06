@@ -1,0 +1,16 @@
+@import './../Styles/postStyle.module';
+.newItem {
+  @include post;
+}
+.newItem textarea {
+  @include textarea;
+}
+.addFile input {
+  visibility: hidden;
+}
+.addFile button {
+  visibility: hidden;
+}
+.buttons {
+  display: flex;
+}

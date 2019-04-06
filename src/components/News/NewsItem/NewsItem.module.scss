@@ -1,0 +1,14 @@
+@import './../../Styles/postStyle.module';
+@import './../../Styles/likeButtonStyle.module';
+.item {
+  @include post;
+}
+.item img {
+  width: 500px;
+}
+.likeButton {
+  @include likeButton;
+}
+.likeButton img {
+  @include likeButtonImg;
+  }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import s from './Post.module.css';
+import React from 'react';
+import s from './Post.module.scss';
 import PropTypes from 'prop-types';
 
 const Post = (props) => {

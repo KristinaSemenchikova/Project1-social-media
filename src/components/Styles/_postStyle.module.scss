@@ -1,0 +1,14 @@
+@mixin post {
+  padding-bottom : 20px;
+}
+@mixin textarea {
+  resize: none;
+}
+@mixin postAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+}
