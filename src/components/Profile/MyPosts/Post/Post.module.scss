@@ -5,8 +5,11 @@
   padding: 5px;
   margin: 5px 0px 0px 0px;
   @include border-radius(5px);
+  @include post;
 }
-
+.message {
+  @include postItemText; 
+}
 .item img {
  @include postAvatar;
 }
@@ -18,4 +21,8 @@
 
 .likeButton {
   @include likeButton;
+}
+.person {
+  display: flex;
+  padding: 5px;
 }

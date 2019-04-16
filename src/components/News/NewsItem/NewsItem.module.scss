@@ -3,6 +3,9 @@
 .item {
   @include post;
 }
+.message {
+  @include postItemText;
+}
 .item img {
   width: 500px;
 }

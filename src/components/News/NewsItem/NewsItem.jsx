@@ -14,8 +14,10 @@ const NewsItem = (props) => {
   };
   return (
     <div className={s.item}>
+      <div className = {s.message}>
       {props.newsText}
       <div> <img src={props.img}></img> </div>
+      </div>
       <div>
         <div className={s.likeButton}>
           <img src='https://image.flaticon.com/icons/svg/66/66744.svg' onClick={likePost}></img>

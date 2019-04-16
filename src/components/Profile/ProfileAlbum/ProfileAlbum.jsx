@@ -7,7 +7,7 @@ const ProfileAlbum = (props) => {
   const [imgIndex, setImgIndex] = useState(0)
   const [isOpen, setIsOpen] = useState(false);
   let image = React.createRef();
-  
+
   let next = () => {
     if (imgIndex < album.length - 1) {
       setImgIndex(imgIndex + 1);
@@ -22,7 +22,6 @@ const ProfileAlbum = (props) => {
     if (isOpen === false) {
       setIsOpen(true);
       let currentImg = album.findIndex((item, i) => +e.currentTarget.id == i)
-      // let path = currentImg[0].props.src;
       setImgIndex(currentImg);
       image.current.style.visibility = 'visible';
     } else {
@@ -32,17 +31,17 @@ const ProfileAlbum = (props) => {
     }
   };
 
-  let photos = props.album.slice(0,4);
-  let album = photos.map((item,i) => <img id = {i} key = {i} src={item} onClick={viewImg}></img>);
-  
+  let photos = props.album.slice(0, 4);
+  let album = photos.map((item, i) => <img id={i} key={i} src={item} onClick={viewImg}></img>);
+
   return (
     <div className={s.album}>
-    <span> <NavLink to='/album'>My photos </NavLink></span>
+      <span> <NavLink to='/album'>My photos </NavLink></span>
       <span> {album} </span>
       <div className={s.view} ref={image}>
-        <button onClick = {prev}>prev</button>
+        <button onClick={prev}>prev</button>
         {album[imgIndex]}
-        <button onClick = {next}>next</button>
+        <button onClick={next}>next</button>
       </div>
     </div>
   )

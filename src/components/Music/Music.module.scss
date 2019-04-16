@@ -1,0 +1,14 @@
+@import './../Styles/variables.module.scss';
+@import './../Styles/_postStyle.module.scss';
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
+.author{
+  font-weight: bold;
+}
+.post {
+  @include postItemText;
+  margin-bottom: 10px;
+}

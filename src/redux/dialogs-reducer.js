@@ -35,9 +35,11 @@ const dialogsReducer = (state = initialState, action) => {
       let newId = state.messages[state.messages.length - 1].id + 1;
       if (/\S/.test(state.newMessage)) {
         let newMessage = { id: newId, message: state.newMessage };
-        // if (state.newMessage.length !== 0) { state.messages.push(newMessage) };
-        newState = { ...state, messages: [newMessage, ...state.messages] }
-        newState.newMessage = "";
+        newState = {
+          ...state,
+          messages: [newMessage, ...state.messages],
+          newMessage: ""
+        }
         return newState;
       } else {
         return state;

@@ -4,13 +4,6 @@ import SettingsMenu from './SettingsMenu';
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-    // let navLog = React.createRef();
-    // let login = () => {
-    //     navLog.current.click();
-    // };
-    // let leave = (event) => {
-    //     event.target.src = 'https://img.icons8.com/small/32/000000/login-rounded-right.png';
-    // }
     return (
         <header className={s.header}>
             <span className={s.logo} >

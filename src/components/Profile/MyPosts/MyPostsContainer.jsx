@@ -2,7 +2,7 @@ import React from 'react';
 import { addPostActionCreator, updatePostActionCreator, likePostActionCreator, dislikePostActionCreator } from '../../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
-import {posts,newPostText} from './../../../redux/selectors';
+import {posts, newPostText, personName} from './../../../redux/selectors';
 
 const MyPostsContainer = (props) => {
   return (<MyPosts
@@ -11,11 +11,13 @@ const MyPostsContainer = (props) => {
     posts={props.posts}
     newPostText={props.newPostText}
     onLike={props.onLike}
-    onDislike={props.onDislike} />)
+    onDislike={props.onDislike} 
+    name = {props.name}/>)
 };
 
 const mapStateToProps = state => {
   return {
+    name : personName(state),
     posts: posts(state),
     newPostText: newPostText(state),
   }

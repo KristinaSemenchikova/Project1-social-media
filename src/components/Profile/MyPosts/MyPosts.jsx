@@ -11,7 +11,8 @@ const MyPosts = (props) => {
     message={item.message}
     likes={item.likes}
     onLike={props.onLike}
-    onDislike={props.onDislike} />
+    onDislike={props.onDislike}
+    name = {props.name} />
   );
   let addNewPost = () => {
     if (props.newPostText.length !== 0) props.addPost();
@@ -26,7 +27,7 @@ const MyPosts = (props) => {
       <h3> My posts</h3>
       <div className={s.newPost}>
         <div>
-          <textarea onChange={onPostChange} cols="50" rows="3" value={props.newPostText} />
+          <textarea onChange={onPostChange} cols="86" rows="3" value={props.newPostText} />
         </div>
         <button onClick={addNewPost}> Add new post </button>
       </div>

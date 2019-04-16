@@ -23,12 +23,11 @@ const News = (props) => {
     };
 
     return (
-        <div className={s.news}>
+        <>
             News
-            {newsElement}
             <div className={s.newItem}>
                 <div>
-                    <textarea cols="69" rows="3" onFocus={showFileButton} onChange={newsTextChange} value={props.newsText} />
+                    <textarea cols="86" rows="3" onFocus={showFileButton} onChange={newsTextChange} value={props.newsText} />
                 </div>
                 <div className={s.buttons}>
                     <button onClick={addNew} > Add new </button>
@@ -38,9 +37,11 @@ const News = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+            {newsElement} 
+        </>
     )
-}
+};
+
 News.propTypes = {
     newsItem: PropTypes.array,
     newsText: PropTypes.string,

@@ -1,5 +1,9 @@
+@import './variables.module.scss';
+@import './borderStyle.module';
+
 @mixin post {
   padding-bottom : 20px;
+  width: 630px;
 }
 @mixin textarea {
   resize: none;
@@ -7,8 +11,10 @@
 @mixin postAvatar {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-     -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
+  @include border-radius(50px);
+}
+@mixin postItemText {
+ padding: 10px;
+ background-color: $navColor;
+ @include border-radius(5px);
 }

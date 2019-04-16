@@ -14,6 +14,7 @@ export let posts = createSelector(profilePageSelector, profilePage => profilePag
 export let newPostText = createSelector(profilePageSelector, profilePage => profilePage.newPostText);
 
 export let info = createSelector(profilePageSelector, profilePage => profilePage.profileInfo);
+export let personName = createSelector(info, info => info.name);
 export let status = createSelector(profilePageSelector, profilePage => profilePage.statusText);
 
 export let name = createSelector(profilePageSelector, profilePage => profilePage.newName);

@@ -40,8 +40,11 @@ const newsReducer = (state = initialState, action) => {
             let newId = state.newsItem[0].id + 1;
             if (/\S/.test(state.newsText)) {
                 let newNewItem = { id: newId, newsItemText: state.newsText, img: '', likes: 12, isLiked: false };
-                newState = { ...state, newsItem: [newNewItem, ...state.newsItem] }
-                newState.newsText = "";
+                newState = {
+                    ...state,
+                    newsItem: [newNewItem, ...state.newsItem],
+                    newsText: ""
+                }
                 return newState;
             } else {
                 return state

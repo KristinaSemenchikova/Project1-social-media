@@ -1,25 +1,38 @@
 import React from 'react';
-import s from './Nav.module.css';
 import { NavLink } from "react-router-dom";
+import styled from 'styled-components';
+
+const NavBar = styled.nav`
+  grid-area: n;
+  background-color: #94c5e6;
+  padding: 10px 20px;
+  margin: 10px 0px 10px 50px;
+  height: 250px;
+  border-radius: 10px;
+  text-align: center;
+  color: #ad7cfc;
+`;
+const Item = styled.div`
+margin: 15px;
+`;
+const Link = styled(NavLink)`
+text-decoration: none;
+  color: white;
+
+  &.active {
+    color: rgb(68, 0, 255);
+  }
+  `;
+
 const Nav = (props) => {
     return (
-        <nav className={s.nav}>
-            <div className={`${s.item} + ${s.active}`}>
-                <NavLink to='/profile' activeClassName={s.active}> Profile </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/dialogs' activeClassName={s.active}> Messages </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/news' activeClassName={s.active}> News </NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to='/music' activeClassName={s.active}> Music </NavLink>
-                <div className={s.item}>
-                    <NavLink to='/settings' activeClassName={s.active}> Settings </NavLink>
-                </div>
-            </div>
-        </nav>
+        <NavBar>
+           <Item> <Link to='/profile' > Profile </Link> </Item>
+            <Item> <Link to='/dialogs' > Messages </Link> </Item>
+            <Item> <Link to='/news'> News </Link> </Item>
+            <Item> <Link to='/music' > Music </Link> </Item>
+            <Item> <Link to='/settings'> Settings </Link> </Item>
+        </NavBar>
     )
 }
 export default Nav;

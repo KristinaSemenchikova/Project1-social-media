@@ -107,15 +107,17 @@ const profileReducer = (state = initialState, action) => {
             let newId = state.posts[0].id + 1;
             if (/\S/.test(state.newPostText)) {
                 let newPost = { id: newId, message: state.newPostText, likes: 9, isLiked: false };
-                newState = { ...state, posts: [newPost, ...state.posts] }
-                newState.newPostText = "";
+                newState = {
+                    ...state,
+                    posts: [newPost, ...state.posts],
+                    newPostText: ""
+                }
                 return newState;
             } else {
                 return state;
             }
         case UPDATE_NEW_POST_TEXT:
             newState = { ...state, newPostText: action.text }
-            //state.newPostText = action.text;
             return newState;
         case ADD_STATUS:
             if (/\S/.test(state.statusText)) {
