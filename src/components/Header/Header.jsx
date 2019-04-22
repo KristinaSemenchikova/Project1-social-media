@@ -10,6 +10,7 @@ const Header = () => {
                 <img alt='logo' src='http://www.stickpng.com/assets/thumbs/587e32209686194a55adab72.png' />
             </span>
             <div className={s.buttons}>
+              <NavLink to='/search'><img alt='search' src="https://img.icons8.com/material/48/000000/search.png"/></NavLink>
                 <SettingsMenu />
                 <NavLink to='/login'><img alt='logout' src='https://img.icons8.com/small/32/000000/login-rounded-right.png' /></NavLink>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Dialogs.module.css';
+import s from './Dialogs.module.scss';
 import PropTypes from 'prop-types';
 import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessageItem/MessageItem';
@@ -19,13 +19,13 @@ const Dialogs = (props) => {
   };
   return (
     <div className={s.dialogs}>
-      <div className={s.dialogsItem} activeClassName={s.active}>
+      <div className={s.dialogsItem}>
         {dialogsElements}
       </div>
       <div className={s.messages} >
         {messageElements}
       </div>
-      <div>
+      <div className={s.writeMessage}>
         <textarea cols="30" rows="5" ref={newMessageElement} onChange={onMessageChange} value={props.newMessage} />
         <button onClick={send}> Send </button>
       </div>

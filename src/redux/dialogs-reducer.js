@@ -1,3 +1,5 @@
+import { handleActions, createAction } from "redux-actions";
+
 let initialState = {
   dialogs: [
     { id: 1, name: 'Christian Bale', avatar: 'https://mfst.igromania.ru/wp-content/uploads/2016/01/bale-start.jpg' },
@@ -14,41 +16,33 @@ let initialState = {
   ],
   newMessage: ''
 };
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-export const sendMessageActionCreator = () => {
-  return ({
-    type: SEND_MESSAGE,
-  })
-};
-export const updateMessageTextActionCreator = (text) => {
-  return ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    text: text
-  })
-};
+export const sendMessageActionCreator = createAction('SEND_MESSAGE');
+export const updateMessageTextActionCreator = createAction('UPDATE_NEW_MESSAGE_TEXT');
 
-const dialogsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SEND_MESSAGE:
-      let newState;
-      let newId = state.messages[state.messages.length - 1].id + 1;
-      if (/\S/.test(state.newMessage)) {
-        let newMessage = { id: newId, message: state.newMessage };
-        newState = {
-          ...state,
-          messages: [newMessage, ...state.messages],
-          newMessage: ""
-        }
-        return newState;
-      } else {
-        return state;
+const dialogsReducer = handleActions({
+
+  [sendMessageActionCreator.toString()]: (state) => {
+    let newState;
+    let newId = state.messages[state.messages.length - 1].id + 1;
+    if (/\S/.test(state.newMessage)) {
+      let newMessage = { id: newId, message: state.newMessage };
+      newState = {
+        ...state,
+        messages: [newMessage, ...state.messages],
+        newMessage: ""
       }
-    case UPDATE_NEW_MESSAGE_TEXT:
-      newState = { ...state, newMessage: action.text };
       return newState;
-    default:
+    } else {
       return state;
-  }
-};
+    }
+  },
+  [updateMessageTextActionCreator.toString()]: (state, {
+    payload: text
+  }) => {
+    let newState = { ...state, newMessage: text };
+    return newState;
+  },
+
+}, initialState);
+
 export default dialogsReducer;

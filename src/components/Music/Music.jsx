@@ -8,7 +8,7 @@ class Music extends React.Component {
         super(props);
         this.state = {
             date: new Date(),
-            quotes: null
+            quotes: []
         }
     }
     componentDidMount() {
@@ -17,10 +17,7 @@ class Music extends React.Component {
             .then(
                 result => {
                     let res = result.data;
-                    let quotes = res.map(item => {
-                      return  <div className={s.post}><span className={s.author}>{item.author} </span>{item.quote}</div>
-                    });
-                    this.setState({ quotes: quotes })
+                    this.setState({ quotes: res})
                 }
             );
     }
@@ -30,14 +27,17 @@ class Music extends React.Component {
     tick() {
         this.setState({ date: new Date() })
     }
-    render() {
+    render() {     
+        let quotesTags = this.state.quotes.map(item => {
+            return  <div className={s.post}><span className={s.author}>{item.author} </span>{item.quote}</div>
+          });
         return (
             <div>
                 <span>
                     Now {this.state.date.toLocaleTimeString()}
                 </span>
                 <div className={s.items}>
-                    {this.state.quotes}
+                    {quotesTags}
                 </div>
             </div>
         )

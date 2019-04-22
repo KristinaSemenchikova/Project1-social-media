@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import s from './DialogItem.module.css';
+import s from './../Dialogs.module.scss';
 import { NavLink } from "react-router-dom";
 
 

@@ -23,3 +23,5 @@ export let city = createSelector(profilePageSelector, profilePage => profilePage
 export let contact = createSelector(profilePageSelector, profilePage => profilePage.newContact);  
 
 export let album = createSelector(profilePageSelector, profilePage => profilePage.photos);
+
+export let searchUsersPageSelector = state => state.searchUsersPage.users;

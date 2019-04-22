@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {addNewActionCreator, updateNewActionCreator,likeNewsActionCreator, dislikeNewsActionCreator } from '../../redux/news-reducer';
+import {addNewNewsItem, updateNewNewsItem,likeNews, dislikeNews } from '../../redux/news-reducer';
 import {newsText, newsItem} from './/../../redux/selectors';
 import News from './News';
 
@@ -25,16 +25,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ( {
           onLike: (id) => {
-            dispatch(likeNewsActionCreator(id))
+            dispatch(likeNews(id))
           },
           onDislike: (id) => {
-            dispatch(dislikeNewsActionCreator(id))
+            dispatch(dislikeNews(id))
           },
           onAddNew: () => {
-            dispatch(addNewActionCreator())
+            dispatch(addNewNewsItem())
           },
           onChangeNew: (text) => {
-            dispatch(updateNewActionCreator(text))
+            dispatch(updateNewNewsItem(text))
           },  
     } )
 }

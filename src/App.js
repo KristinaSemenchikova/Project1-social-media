@@ -10,6 +10,8 @@ import NewsContainer from './components/News/NewsContainer';
 import SettingsContainer from './components/Settings/SettingsContainer';
 import Login from './components/LoginLogout/LoginPage';
 import AlbumContainer from './components/Profile/ProfileAlbum/AlbumContainer';
+import SearchUsersContainer from './components/SearchUsers/SearchUsersContainer';
+
 
 
 const App = (props) => {
@@ -26,6 +28,7 @@ const App = (props) => {
         <Route path='/settings' render={() => <SettingsContainer />} />
         <Route path = '/login' render = {() => <Login/>} />
         <Route path = '/album' render = {() => <AlbumContainer/>} />
+        <Route path = '/search' render = {() => <SearchUsersContainer/>} />
         </Switch>
       </div>
     </div>

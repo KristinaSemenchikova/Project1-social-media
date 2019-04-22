@@ -2,13 +2,14 @@ import { combineReducers, createStore } from "redux";
 import profileReducer from './profile-reducer';
 import dialogsReducer from './dialogs-reducer';
 import newsReducer from './news-reducer';
-import { reducer as formReducer } from 'redux-form';
+import usersReducer from './users-reducer';
+
 
 let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     newsPage: newsReducer,
-    form: formReducer
+    searchUsersPage: usersReducer
 });
 let store = createStore(reducers);
 
