@@ -1,21 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchUsers from './SearchUsers';
-import {searchUsersPageSelector} from './../../redux/selectors';
-import { followUserActionCreator, unfollowUserActionCreator, setUsersActionCreator} from '../../redux/users-reducer';
+import {users, nameFilter,searchUserByName} from './../../redux/selectors';
+import { followUserActionCreator, unfollowUserActionCreator, setUsersActionCreator,setFilterActionCreator} from '../../redux/users-reducer';
 
 const SearchUsersContainer = (props) => {
     return (
         <SearchUsers 
-        users = {props.searchUsers}
+        users = {props.users}
+        nameFilter = {props.nameFilter}
         followUser = {props.followUser}
         unfollowUser = {props.unfollowUser}
+        setFilter = {props.setFilter}
+        setUsers = {props.setUsers}
          />
     )
 }
 const mapStateToProps = state => {
     return {
-        searchUsers: searchUsersPageSelector(state)
+        // users: users(state),
+        users: searchUserByName(state),
+        nameFilter: nameFilter(state)    
     }
 };
 const mapDispatchToProps = dispatch => {
@@ -29,6 +34,9 @@ const mapDispatchToProps = dispatch => {
         setUsers: (users) => {
             dispatch(setUsersActionCreator(users))
         },
+        setFilter: (name) => {
+            dispatch(setFilterActionCreator(name))
+        }
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(SearchUsersContainer);

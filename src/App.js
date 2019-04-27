@@ -8,11 +8,10 @@ import {Route, Switch } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NewsContainer from './components/News/NewsContainer';
 import SettingsContainer from './components/Settings/SettingsContainer';
-import Login from './components/LoginLogout/LoginPage';
 import AlbumContainer from './components/Profile/ProfileAlbum/AlbumContainer';
 import SearchUsersContainer from './components/SearchUsers/SearchUsersContainer';
-
-
+import FriendsContainer from './components/Friends/FriendsContainer';
+import LoginPageContainer from './components/LoginLogout/LoginPageContainer';
 
 const App = (props) => {
   return (
@@ -23,10 +22,11 @@ const App = (props) => {
       <Switch>
         <Route path='/dialogs' render={() => <DialogsContainer/>} />
         <Route path='/profile' render={() => <Profile/>} />
+        <Route path='/friends' render={() => <FriendsContainer/>} />
         <Route path='/news' render={() => <NewsContainer />} />
         <Route path='/music' render={() => <Music />} />
         <Route path='/settings' render={() => <SettingsContainer />} />
-        <Route path = '/login' render = {() => <Login/>} />
+        <Route path = '/login' render = {() => <LoginPageContainer/>} />
         <Route path = '/album' render = {() => <AlbumContainer/>} />
         <Route path = '/search' render = {() => <SearchUsersContainer/>} />
         </Switch>

@@ -8,34 +8,25 @@ class Music extends React.Component {
         super(props);
         this.state = {
             date: new Date(),
-            quotes: []
+            users: []
         }
     }
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 1000);
-        axios.get('https://breaking-bad-quotes.herokuapp.com/v1/quotes/5')
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(
                 result => {
-                    let res = result.data;
-                    this.setState({ quotes: res})
+                    let res = result.data.items;
+                    console.log(res)
+                    // this.setState({ quotes: res})
                 }
             );
-    }
-    componentWillUnmount() {
-        clearInterval(this.timerID)
-    }
-    tick() {
-        this.setState({ date: new Date() })
-    }
+    }  
     render() {     
-        let quotesTags = this.state.quotes.map(item => {
+        let quotesTags = this.state.users.map(item => {
             return  <div className={s.post}><span className={s.author}>{item.author} </span>{item.quote}</div>
           });
         return (
             <div>
-                <span>
-                    Now {this.state.date.toLocaleTimeString()}
-                </span>
                 <div className={s.items}>
                     {quotesTags}
                 </div>

@@ -36,7 +36,7 @@ const ProfileAlbum = (props) => {
 
   return (
     <div className={s.album}>
-      <span> <NavLink to='/album'>My photos </NavLink></span>
+      <span> <NavLink to='/album'>My photos {props.album.length} </NavLink></span>
       <span> {album} </span>
       <div className={s.view} ref={image}>
         <button onClick={prev}>prev</button>
