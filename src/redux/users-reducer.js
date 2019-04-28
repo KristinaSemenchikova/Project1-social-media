@@ -13,8 +13,10 @@ let initialState = {
 export const followUserActionCreator = createAction('FOLLOW_USER');
 export const unfollowUserActionCreator = createAction('UNFOLLOW_USER');
 export const setUsersActionCreator = createAction('SET_USERS');
+export const clearUsersAC = createAction('CLEAR_USERS');
 export const setFilterActionCreator = createAction('SET_FILTER');
 export const loginActionCreator = createAction('LOG_IN');
+export const logOutAC = createAction('LOG_OUT');
 export const setLoginAC = createAction('SET_LOGIN');
 export const setPasswordAC = createAction('SET_PASSWORD');
 
@@ -23,10 +25,13 @@ const usersReducer = handleActions({
     [setUsersActionCreator.toString()]: (state, {
         payload: users
     }) => {
-        let newState = { ...state, users: [...users] };
+        let newState = { ...state, users: [...state.users,...users] };
         return newState;
     },
-
+    [clearUsersAC.toString()]: (state) => {
+        let newState = { ...state, users: [] };
+        return newState;
+    },
     [followUserActionCreator.toString()]: (state, {
         payload: id
     }) => {
@@ -67,6 +72,11 @@ const usersReducer = handleActions({
     [loginActionCreator.toString()]: (state) => {
         let newState = { ...state };
         newState.isLogin = true;
+        return newState;
+    },
+    [logOutAC.toString()]: (state) => {
+        let newState = { ...state };
+        newState.isLogin = false;
         return newState;
     }
 }, initialState);

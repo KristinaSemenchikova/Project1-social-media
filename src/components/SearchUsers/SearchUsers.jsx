@@ -1,30 +1,50 @@
 import React, { PureComponent } from 'react';
 import s from './SearchUsers.module.scss'
 import axios from 'axios';
+import instance from './../../Service/Service';
 
 class SearchUsers extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             filter: 'all',
+            page: 1
         };
         this.onSelect = this.onSelect.bind(this);
         this.nameFilter = this.nameFilter.bind(this);
         this.unfollowUser = this.unfollowUser.bind(this);
         this.followUser = this.followUser.bind(this);
-        this.loadUsers = this.loadUsers.bind(this)
+        this.loadUsers = this.loadUsers.bind(this);
+        this.clearUsers = this.clearUsers.bind(this);
+        this.getFullProfile = this.getFullProfile.bind(this)
     }
     loadUsers() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        instance.get('/users',
+            {
+                params: {
+                    count: 10,
+                    page: this.state.page
+                }
+            })
             .then(
                 result => {
+                    console.log(result);
                     let userItems = result.data.items;
-                    this.props.setUsers(userItems)
+                    this.props.setUsers(userItems);
+                    this.setState({
+                        page: this.state.page + 1
+                    })
                 }
             );
     }
+    clearUsers() {
+        this.props.clearUsers()
+    }
     componentDidMount() {
-            this.loadUsers()
+        this.loadUsers()
+    }
+    componentWillUnmount() {
+        this.clearUsers()
     }
     onSelect(event) {
         switch (event.target.value) {
@@ -47,23 +67,34 @@ class SearchUsers extends React.PureComponent {
     }
     unfollowUser(e) {
         let userID = +e.target.dataset.userId;
-        axios.delete('https://social-network.samuraijs.com/api/1.0/follow?',
-            {
-                params: {
-                    userId: userID,
+        instance.delete(`/follow/${userID}`)
+            .then(result => {
+                console.log(result);
+                if (result.data.resultCode === 0) {
+                    this.props.ufollowUser(userID)
                 }
             })
-            .then(this.props.followUser(userID))
     }
     followUser(e) {
         let userID = +e.target.dataset.userId;
-        axios.post('https://social-network.samuraijs.com/api/1.0/follow?',
-            {
-                params: {
-                    userId: userID,
+        console.log(userID);
+        instance.post(`follow`,{userId : userID })
+            .then(result => {
+                console.log(result);
+                if (result.data.resultCode === 0) {
+                    this.props.followUser(userID)
                 }
-            })
-            .then(this.props.followUser(userID));
+            }
+            );
+    }
+    getFullProfile(e){
+        let userID = +e.target.dataset.id;
+        console.log(userID);
+        instance.get(`/profile/${userID}`)
+            .then(result => {
+                console.log(result);
+            }
+            );  
     }
     nameFilter(event) {
         let name = event.target.value;
@@ -79,7 +110,7 @@ class SearchUsers extends React.PureComponent {
                         ? <img className={s.userAvatar} src='https://img.clipartimage.com/ninja-samurai-clipart-free-800_858.png' alt='avatar' />
                         : <img className={s.userAvatar} src={item.photos.small} alt='avatar' />
                     }
-                    <span><b>{item.name}</b></span>
+                    <span> <a data-id={item.id} onClick = {this.getFullProfile}href='#'>{item.name}</a></span>
                 </div>
                 <span>{item.status}</span>
                 {(item.followed)
@@ -91,8 +122,11 @@ class SearchUsers extends React.PureComponent {
         )
         return (
             <div className={s.wrapper}>
-                <div>
+                <div className={s.users}>
                     {users}
+                    <div>
+                        <button onClick={this.loadUsers}>More</button>
+                    </div>
                 </div>
                 <div className={s.filterItem}>
                     <span> {this.props.users.length} users </span>
@@ -104,8 +138,6 @@ class SearchUsers extends React.PureComponent {
                         <option value='true'>Followed</option>
                         <option value='false'>Unfollowed</option>
                     </select>
-                    Load more users
-                    <button>More</button>
                 </div>
             </div>
         )
