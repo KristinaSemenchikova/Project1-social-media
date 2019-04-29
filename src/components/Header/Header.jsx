@@ -14,7 +14,7 @@ class Header extends React.Component {
             .then(result => {
                 console.log(result);
                 if (result.data.resultCode === 0) {
-                    this.props.logOut();                 
+                    this.props.logOut(); 
                 }
             })
     }

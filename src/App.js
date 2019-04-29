@@ -25,14 +25,13 @@ const App = (props) => {
             isLogin ? (<Redirect to='/profile' />) : (<Redirect to='/login' />)
           )
           } />
-          <Route exact path='/login' render={() => <LoginPageContainer/>} />
+          <Route path='/login' render={() => <LoginPageContainer/>} />
           <Route path='/dialogs' render={() => <DialogsContainer />} />
           <Route path='/profile' render={() => <Profile />} />
           <Route path='/friends' render={() => <FriendsContainer />} />
           <Route path='/news' render={() => <NewsContainer />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/settings' render={() => <SettingsContainer />} />
-          <Route path='/login' render={() => <LoginPageContainer />} />
           <Route path='/album' render={() => <AlbumContainer />} />
           <Route path='/search' render={() => <SearchUsersContainer />} />
         </Switch>

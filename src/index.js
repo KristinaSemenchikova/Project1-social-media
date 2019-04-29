@@ -7,14 +7,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './redux/redux-store';
 
- //let rerenderEntireTree = () => {
+ 
 ReactDOM.render(
     <Provider store = {store}> 
     <BrowserRouter>
-        <App state={store.getState.call(store)} dispatch ={store.dispatch.bind(store)} />
+        <App />
     </BrowserRouter>
     </Provider>, document.getElementById('root'));
-//}
+
 // store.subscribe method gets observer (function) as a parameter
 //rerenderEntireTree(store.getState.bind(store));
 //store.subscribe(rerenderEntireTree);

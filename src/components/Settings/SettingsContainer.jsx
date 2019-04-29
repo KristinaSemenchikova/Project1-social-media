@@ -1,31 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
-import {changeNameActionCreator,changeBirthActionCreator,changeContactActionCreator, changeCityActionCreator,addInfoActionCreator} from './../../redux/profile-reducer';
-import {name, birthdayDate,city,contact} from './../../redux/selectors';
-const SettingsContainer = (props) => {
-    
+import { changeNameActionCreator, changeBirthActionCreator, changeContactActionCreator, changeCityActionCreator, addInfoActionCreator } from './../../redux/profile-reducer';
+import { name, birthdayDate, city, contact } from './../../redux/selectors';
+import {Field, reduxForm} from 'redux-form'
+
+let SettingsContainer = (props) => {
+    let name = props.name;
+    let dateOfBirth = props.birthdayDate;
+    let city = props.city;
+    let contact = props.contact;
+
+    const submit = values => {
+console.log(values)
+    }
     return (
-       <Settings 
-       name = {props.name}
-       birthdayDate = {props.birthdayDate}
-       city = {props.city}
-       contact = {props.contact} 
-       changeBirth = {props.changeBirth}
-       changeName = {props.changeName}
-       changeCity = {props.changeCity}
-       changeContact = {props.changeContact}
-       addInfo = {props.addInfo}
-       />
+    //     <Settings 
+    //    name = {props.name}
+    //    birthdayDate = {props.birthdayDate}
+    //    city = {props.city}
+    //    contact = {props.contact} 
+    //    changeBirth = {props.changeBirth}
+    //    changeName = {props.changeName}
+    //    changeCity = {props.changeCity}
+    //    changeContact = {props.changeContact}
+    //    addInfo = {props.addInfo}
+    //    />
+
+    <Settings 
+    onSubmit = {submit}
+    initialValues={ {name, dateOfBirth, city, contact } }/>
     )
 }
 const mapStateToProps = (state) => {
-    return ( {
+    return ({
         name: name(state),
         birthdayDate: birthdayDate(state),
         city: city(state),
-        contact: contact(state),   
-    } )
+        contact: contact(state),
+    })
 }
 const mapDispatchToProps = (dispatch) => {
     return ({
@@ -42,7 +55,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(changeContactActionCreator(text))
         },
         addInfo: () => {
-            dispatch (addInfoActionCreator())
+            dispatch(addInfoActionCreator())
         }
     }
     )
