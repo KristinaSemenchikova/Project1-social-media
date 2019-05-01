@@ -1,87 +1,78 @@
 import React from 'react';
-import styled from 'styled-components';
-import {Field, reduxForm} from 'redux-form'
+import s from './Settings.module.scss';
+import { Field, reduxForm } from 'redux-form'
 
-// const Form = styled.form`
-//  display: grid;
-//   grid-template-columns: 20% 30%;
-//   grid-template-rows: 1fr 1fr 1fr 1fr;
-//   grid-template-areas: ". ." ". ." ". ." ". .""   .";
-
-// `;
-// const Input = styled.input`
-// margin: 5px;
-// `;
-// const Span = styled.span`
-// font-size: 90%;
-// `;
-
-// const Settings = (props) => {
-//     let onChangeName = (e) => {
-//         let text = e.target.value;
-//         props.changeName(text)
-//     };
-//     let onChangeBirth = (e) => {
-//         let text = e.target.value;
-//         props.changeBirth(text)
-//     };
-//     let onChangeCity = (e) => {
-//         let text = e.target.value;
-//         props.changeCity(text)
-//     };
-//     let onChangeContact = (e) => {
-//         let text = e.target.value;
-//         props.changeContact(text)
-//     };
-//     return (
-//         <div>
-//             <span> Profile Settings </span>
-//             <Form>
-//                 <Span> Name </Span>
-//                 <Input type='text' onChange={onChangeName} value={props.name} />
-//                 <Span> Date of birth</Span>
-//                 <Input type='date' onChange={onChangeBirth} value={props.newBirthDate} />
-//                 <Span> City </Span>
-//                 <Input type='text' onChange={onChangeCity} value={props.city} />
-//                 <Span> Contact</Span>
-//                 <Input type='number' onChange={onChangeContact} value={props.contact} />
-//             </Form>
-//             <button onClick={props.addInfo}> Submit </button>
-//         </div>
-//     )
-// }
-// export default Settings;
-const renderInput = field =>  {
-   return  (<div>
-    <input {...field.input} type={field.type}/>  
-    {field.meta.touched &&
-     field.meta.error &&
-     <span className="error">{field.meta.error}</span>}
-  </div>)
+const renderInput = field => {
+    return (<div>
+        <input {...field.input} type={field.type} />
+        {field.meta.touched &&
+            field.meta.error &&
+            <span className="error">{field.meta.error}</span>}
+    </div>)
 };
 let Settings = (props) => {
-    debugger
-   const {handleSubmit} = props;
+    const { handleSubmit } = props;
     return (
         <>
-            <form onSubmit = {handleSubmit}>
-               <div>
-                   <label htmlFor = 'name'>Name</label>
-                   <Field name ='name' component={renderInput} type = 'text'/>
-               </div>
-               <div>
-                   <label htmlFor = 'dateOfBirth'>Date of birth</label>
-                   <Field name ='dateOfBirth' component={renderInput} type = 'date'/>
-               </div>
-               <div>
-                   <label htmlFor = 'city'>City</label>
-                   <Field name ='city' component={renderInput} type = 'text'/>
-               </div>
-               <div>
-                   <label htmlFor = 'contact'>Contact</label>
-                   <Field name ='contact' component={renderInput} type = 'number'/>
-               </div>
-               <div>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor='fullName'>Fullname</label>
+                    <Field name='fullName' component={renderInput} type='text' />
+                </div>
+                <div>
+                    <label htmlFor='aboutMe'>About me</label>
+                    <Field name='aboutMe' component={renderInput} type='text' />
+                </div>
+                <div>
+                    <label htmlFor="lookingForAJob">Looking for a job</label>
+                    <Field
+                        name="lookingForAJob"
+                        id="lookingForAJob"
+                        component={renderInput}
+                        type="checkbox"
+                    />
+                </div>
+                <div>
+                    <label htmlFor='lookingForAJobDescription'>Looking for a job</label>
+                    <Field name='lookingForAJobDescription' component={renderInput} type='text' />
+                </div>
+                <div>Contacts:</div> 
+                <div className = {s.contactsField}>
+                    <div>
+                        <label htmlFor='facebook'>Facebook</label>
+                        <Field name='facebook' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='github'>Github</label>
+                        <Field name='github' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='instagram'>Instagram</label>
+                        <Field name='instagram' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='mail'>mail</label>
+                        <Field name='mail' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='twitter'>twitter</label>
+                        <Field name='twitter' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='vk'>vk</label>
+                        <Field name='vk' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='website'>website</label>
+                        <Field name='website' component={renderInput} type='text' />
+                    </div>
+                    <div>
+                        <label htmlFor='youtube'>youtube</label>
+                        <Field name='youtube' component={renderInput} type='text' />
+                    </div>
+                </div>
+                
+                <div>
                     <button type="submit">Submit</button>
                 </div>
             </form>
@@ -90,10 +81,9 @@ let Settings = (props) => {
 }
 
 Settings = reduxForm({
-    // a unique name for the form
     form: 'settings'
-  })(Settings)
-  
-  export default Settings;
+})(Settings)
+
+export default Settings;
 
 

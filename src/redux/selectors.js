@@ -14,13 +14,13 @@ export let posts = createSelector(profilePageSelector, profilePage => profilePag
 export let newPostText = createSelector(profilePageSelector, profilePage => profilePage.newPostText);
 
 export let info = createSelector(profilePageSelector, profilePage => profilePage.profileInfo);
-export let personName = createSelector(info, info => info.name);
 export let status = createSelector(profilePageSelector, profilePage => profilePage.statusText);
 
-export let name = createSelector(profilePageSelector, profilePage => profilePage.newName);
-export let birthdayDate = createSelector(profilePageSelector, profilePage => profilePage.newBirthDate);
-export let city = createSelector(profilePageSelector, profilePage => profilePage.newCity);
-export let contact = createSelector(profilePageSelector, profilePage => profilePage.newContact);
+export let fullName = createSelector(info, profileInfo => profileInfo.fullName);
+export let aboutMe = createSelector(info, profileInfo => profileInfo.aboutMe);
+export let lookingForAJob = createSelector(info, profileInfo => profileInfo.lookingForAJob);
+export let lookingForAJobDescription = createSelector(info, profileInfo => profileInfo.lookingForAJobDescription);
+export let contacts = createSelector(info, profileInfo => profileInfo.contacts);
 
 export let album = createSelector(profilePageSelector, profilePage => profilePage.photos);
 

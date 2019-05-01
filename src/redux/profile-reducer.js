@@ -14,15 +14,34 @@ let initialState = {
     newPostText: 'Anything meow?',
     statusText: 'Change status',
     profileInfo: {
-        name: 'Soft Kitty',
-        birthDate: '08.08.1998',
-        city: 'London',
-        contact: '+44 810 234 678 98 33',
+        fullName: 'Soft Kitty',
+        aboutMe: '888',
+        lookingForAJob: true,
+        lookingForAJobDescription: 'London',
+        contacts: {
+            facebook: "facebook.com",
+            github: "github.com",
+            instagram: "instagra.com/sds",
+            mainLink: null,
+            twitter: "https://twitter.com/@sdf",
+            vk: "vk.com/dimych",
+            website: null,
+            youtube: null
+        },
     },
-    newName: '',
-    newBirthDate: '',
+    newFullName: '',
+    newlookingForAJobDescription: '',
     newCity: '',
-    newContact: '',
+    newContacts: {
+        facebook: '',
+        github: '',
+        instagram: '',
+        mainLink: null,
+        twitter: null,
+        vk: null,
+        website: null,
+        youtube: null
+    },
 };
 
 export const addPostActionCreator = createAction('ADD_POST');
@@ -94,55 +113,6 @@ const profileReducer = handleActions({
         newStatePost[0].isLiked = false;
         return newState;
     },
-
-    [changeNameActionCreator.toString()]: (state, { payload: text }) => {
-        let newState = { ...state, newName: text };
-        return newState;
-    },
-
-    [changeBirthActionCreator.toString()]: (state, { payload: text }) => {
-        let newState = { ...state, newBirthDate: text };
-        return newState;
-    },
-
-    [changeCityActionCreator.toString()]: (state, { payload: text }) => {
-        let newState = { ...state, newCity: text };
-        return newState;
-    },
-
-    [changeContactActionCreator.toString()]: (state, { payload: text }) => {
-        let newState = { ...state, newContact: text };
-        return newState;
-    },
-
-    [addInfoActionCreator.toString()]: (state) => {
-        let newState = { ...state, profileInfo: { ...state.profileInfo } };
-        if (!(/\S/.test(state.newName)) && state.newName.length < 5) {
-            newState.profileInfo.name = state.profileInfo.name
-        }
-        else {
-            newState.profileInfo.name = state.newName
-        };
-        if (!(/\S/.test(state.newBirthDate)) && state.newBirthDate.length < 5) {
-            newState.profileInfo.birthDate = state.profileInfo.birthDate
-        }
-        else {
-            newState.profileInfo.birthDate = state.newBirthDate
-        };
-        if (!(/\S/.test(state.newCity)) && state.newCity.length < 3) {
-            newState.profileInfo.city = state.profileInfo.city
-        }
-        else {
-            newState.profileInfo.city = state.newCity
-        };
-        if (!(/\S/.test(state.newContact)) && state.newContact.length < 5) {
-            newState.profileInfo.contact = state.profileInfo.contact
-        }
-        else {
-            newState.profileInfo.contact = state.newContact
-        };
-        return newState;
-    }
 }, initialState);
 
 export default profileReducer;
