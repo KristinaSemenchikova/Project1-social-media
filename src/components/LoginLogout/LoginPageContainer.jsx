@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginPage from './LoginPage';
 import {isLogin, authData} from './../../redux/selectors';
-import { loginActionCreator, setLoginAC, setPasswordAC} from '../../redux/users-reducer';
+import { setLoginAC, setPasswordAC, toLogIn} from '../../redux/login-reducer';
 
 const LoginPageContainer = (props) => {
     return (
         <LoginPage
         isLogin = {props.isLogin}
-        toLogIn = {props.logIn}
+        toLogIn = {props.toLogIn}
         authData = {props.authData}
         setLogin = {props.setLogin}
         setPassword = {props.setPassword}
@@ -23,8 +23,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        logIn : () => {
-            dispatch(loginActionCreator())
+        toLogIn : (data) => {
+            dispatch(toLogIn(data))
         },
         setLogin : (login) => {
             dispatch(setLoginAC(login))

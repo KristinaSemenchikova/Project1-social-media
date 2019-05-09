@@ -52,7 +52,7 @@ const SettingsMenu = () => {
             <Menu ref={settingsMenu}>
                 <Ul>
                     <li> <Link to='/profile'> My page </Link></li>
-                    <li> <Link to='/settings'> Edit profile</Link></li>
+                    <li> <Link to='/edit'> Edit profile</Link></li>
                     <li> <Link to='/settings'> Settings</Link></li>
                 </Ul>
             </Menu>

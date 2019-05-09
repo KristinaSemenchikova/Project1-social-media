@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import s from './Login.module.css';
-import axios from 'axios';
-import instance from '../../Service/Service';
-
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
@@ -12,19 +10,7 @@ class Login extends React.Component {
         this.setPassword = this.setPassword.bind(this)
     }
     toLogIn() {
-        instance.post('auth/login',
-            {
-                email: this.props.authData.login,
-                password: this.props.authData.password,
-                rememberMe: true,
-                
-            })
-            .then(result => {
-                console.log(result);
-                if(result.data.resultCode === 0)  {
-                    this.props.toLogIn() 
-                }
-            })
+        this.props.toLogIn(this.props.authData)
     }
     setLogin(e) {
         let login = e.target.value;
@@ -37,11 +23,13 @@ class Login extends React.Component {
     render() {
         return (
             <div>
+                {this.props.isLogin && <Redirect to = '/profile'/>}
                 <form className={s.logIn}>
                     <span>Login</span>
                     <input onChange={this.setLogin} value={this.props.authData.login} type='login' />
                     <span> Password</span>
                     <input onChange={this.setPassword} value={this.props.authData.password} type='password' />
+                    <label>Remember me<input type = 'checkbox' value={this.props.authData.rememberMe} /></label>
                 </form>
                 <button onClick={this.toLogIn}> Login </button>
             </div>

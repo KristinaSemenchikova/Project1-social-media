@@ -1,4 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
+import instance, { axiosUpload } from "../Service/Service";
 
 let initialState = {
     posts: [
@@ -14,34 +15,33 @@ let initialState = {
     newPostText: 'Anything meow?',
     statusText: 'Change status',
     profileInfo: {
-        fullName: 'Soft Kitty',
-        aboutMe: '888',
+        userId : 1050,
+        fullName: '',
+        aboutMe: '',
         lookingForAJob: true,
-        lookingForAJobDescription: 'London',
+        lookingForAJobDescription: '',
         contacts: {
             facebook: "facebook.com",
             github: "github.com",
-            instagram: "instagra.com/sds",
-            mainLink: null,
-            twitter: "https://twitter.com/@sdf",
-            vk: "vk.com/dimych",
-            website: null,
-            youtube: null
+            instagram: "instagram.com",
+            mainLink: 'link',
+            twitter: 'twitter',
+            vk: "vk.com",
+            website: 'web',
+            youtube: 'youtube'
         },
+        photos: {
+            large: '',
+            small: ''
+        }
     },
-    newFullName: '',
-    newlookingForAJobDescription: '',
-    newCity: '',
-    newContacts: {
-        facebook: '',
-        github: '',
-        instagram: '',
-        mainLink: null,
-        twitter: null,
-        vk: null,
-        website: null,
-        youtube: null
+    photo: null,
+    setProfileInfoRequest: {
+        sending: false,
+        success: false,
+        error: false
     },
+    userInfo: null
 };
 
 export const addPostActionCreator = createAction('ADD_POST');
@@ -51,11 +51,14 @@ export const updateStatusActionCreator = createAction('UPDATE_STATUS_TEXT');
 export const likePostActionCreator = createAction('LIKE_POST');
 export const dislikePostActionCreator = createAction('DISLIKE_POST');
 
-export const changeNameActionCreator = createAction('CHANGE_NAME');
-export const changeBirthActionCreator = createAction('CHANGE_BIRTH');
-export const changeCityActionCreator = createAction('CHANGE_CITY');
-export const changeContactActionCreator = createAction('CHANGE_CONTACT');
-export const addInfoActionCreator = createAction('ADD_INFO');
+export const sendingSetProfileRequestAC = createAction('SENDING_SET_REQUEST');
+export const setProfilerequestErrorAC = createAction('SET_REQUEST_ERROR_');
+export const setProfilerequestSuccessAC = createAction('SET_REQUEST_SUCCESS');
+
+export const setUserInfoAC = createAction('SET_USER_INFO');
+export const setUserPhoto = createAction('SET_USER_PHOTO');
+export const setProfileInfoAC = createAction('SET_PROFILE_INFO');
+
 
 
 const profileReducer = handleActions({
@@ -75,7 +78,35 @@ const profileReducer = handleActions({
             return state;
         }
     },
-
+    [sendingSetProfileRequestAC.toString()]: (state, { payload: bool }) => {
+        let newState = {
+            ...state, setProfileInfoRequest: {
+                ...state.setProfileInfoRequest
+            }
+        };
+        newState.setProfileInfoRequest.sending = bool;
+        return newState;
+    },
+    [setProfilerequestSuccessAC.toString()]: (state) => {
+        let newState = {
+            ...state, setProfileInfoRequest: {
+                ...state.setProfileInfoRequest
+            }
+        };
+        newState.setProfileInfoRequest.success = true;
+        newState.setProfileInfoRequest.error = false;
+        return newState;
+    },
+    [setProfilerequestErrorAC.toString()]: (state) => {
+        let newState = {
+            ...state, setProfileInfoRequest: {
+                ...state.setProfileInfoRequest
+            }
+        };
+        newState.setProfileInfoRequest.success = false;
+        newState.setProfileInfoRequest.error = true;
+        return newState;
+    },
     [updatePostActionCreator.toString()]: (state, { payload: text }) => {
         let newState = { ...state, newPostText: text }
         return newState;
@@ -98,7 +129,7 @@ const profileReducer = handleActions({
         let newState = {
             ...state, posts: [...state.posts]
         };
-        let newStatePost = newState.posts.filter((item) => item.id == id);
+        let newStatePost = newState.posts.filter((item) => item.id === id);
         newStatePost[0].likes += 1;
         newStatePost[0].isLiked = true;
         return newState;
@@ -108,11 +139,138 @@ const profileReducer = handleActions({
         let newState = {
             ...state, posts: [...state.posts]
         };
-        let newStatePost = newState.posts.filter((item) => item.id == id);
+        let newStatePost = newState.posts.filter((item) => item.id === id);
         newStatePost[0].likes -= 1;
         newStatePost[0].isLiked = false;
+        return newState;
+    },
+    [setUserInfoAC.toString()]: (state, { payload: userInfo }) => {
+        return { ...state, userInfo: userInfo }
+    },
+    [setUserPhoto.toString()]: (state, { payload: photo }) => {
+        let newState = { ...state };
+        newState.photo = photo;
+        return newState;
+    },
+    [setProfileInfoAC.toString()]: (state, { payload: values }) => {
+        let newState = { ...state };
+        newState.profileInfo = {
+            aboutMe: values.aboutMe,
+            contacts: {
+                facebook: values.facebook,
+                github: values.github,
+                instagram: values.instagram,
+                mainLink: values.mail,
+                twitter: values.twitter,
+                vk: values.vk,
+                website: values.website,
+                youtube: values.youtube
+            },
+            lookingForAJob: values.lookingForAJob,
+            lookingForAJobDescription: values.lookingForAJobDescription,
+            fullName: values.fullName,
+            photos: {
+                large: values.photos.large,
+                small: values.photos.small
+            }
+        };
         return newState;
     },
 }, initialState);
 
 export default profileReducer;
+
+export const getUserInfo = (id) => {
+    return async (dispatch) => {
+        try {
+            let result = await instance.get(`/profile/${id}`);
+            console.log(result);
+            dispatch(setUserInfoAC(result))
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
+export const setStatus = (status) => {
+    return async (dispatch) => {
+        try {
+            let result = await instance.put('profile/status', {
+                status: status
+            });
+            if (result.data.resultCode === 0) dispatch(addStatusActionCreator())
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+export const getStatus = () => {
+    return async (dispatch) => {
+        try {
+            let result = await instance.get('profile/status/1050');
+            console.log(result);
+            dispatch(addStatusActionCreator())
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+export const uploadPhoto = (photo) => {
+    return async (dispatch) => {
+        try {
+            let result = await axiosUpload.put('profile/photo', photo);
+            console.log(result)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const setProfileInfo = (values) => {
+    debugger
+    return async (dispatch) => {
+        try {
+            dispatch(sendingSetProfileRequestAC(true));
+            let result = await instance.put('profile',
+                {
+
+                    "aboutMe": values.aboutMe,
+                    "contacts": {
+                        facebook: values.facebook,
+                        github: values.github,
+                        instagram: values.instagram,
+                        mainLink: values.mail,
+                        twitter: values.twitter,
+                        vk: values.vk,
+                        website: values.website,
+                        youtube: values.youtube
+                    },
+                    "lookingForAJob": values.lookingForAJob,
+                    "lookingForAJobDescription": values.lookingForAJobDescription,
+                    "fullName": values.fullName
+                }
+            );
+            dispatch(sendingSetProfileRequestAC(false));
+            if (result.data.resultCode === 0) {
+                dispatch(setProfilerequestSuccessAC());
+                console.log(result.data)
+            } else if (result.data.resultCode === 1) {
+                dispatch(setProfilerequestErrorAC());
+            }
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
+export const getProfileInfo = (id) => {
+    debugger
+    return async (dispatch) => {
+        try {
+            let result = await instance.get(`/profile/${id}`);
+            if (result.status === 200) {
+                dispatch(setProfileInfoAC(result.data))
+            }  
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}

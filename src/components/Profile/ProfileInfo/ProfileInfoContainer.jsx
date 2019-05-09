@@ -1,5 +1,5 @@
 import React from 'react';
-import { addStatusActionCreator, updateStatusActionCreator } from '../../../redux/profile-reducer';
+import { updateStatusActionCreator, setStatus, getStatus,getProfileInfo } from '../../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo';
 import {info, status} from './../../../redux/selectors';
@@ -10,7 +10,9 @@ const ProfileInfoContainer = (props) => {
     info = {props.info} 
     status={props.status} 
     addStatus = {props.addStatus}
-    updateStatus = {props.updateStatus} />
+    getStatus = {props.getStatus}
+    updateStatus = {props.updateStatus} 
+    getProfileInfo = {props.getProfileInfo} />  
   )
 }
 const mapStateToProps = (state) => {
@@ -21,11 +23,17 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 return {
-  addStatus : (text) => {
-    dispatch(addStatusActionCreator(text))
+  addStatus : (status) => {
+    dispatch(setStatus(status))
+  },
+  getStatus : () => {
+    dispatch(getStatus())
   },
   updateStatus: (text) => {
     dispatch(updateStatusActionCreator(text))
+  },
+  getProfileInfo : (id) => {
+    dispatch(getProfileInfo(id))
   }
 }
 };

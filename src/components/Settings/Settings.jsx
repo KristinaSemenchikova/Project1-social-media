@@ -13,7 +13,7 @@ const renderInput = field => {
 let Settings = (props) => {
     const { handleSubmit } = props;
     return (
-        <>
+        <div className={s.settings}>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor='fullName'>Fullname</label>
@@ -36,8 +36,8 @@ let Settings = (props) => {
                     <label htmlFor='lookingForAJobDescription'>Looking for a job</label>
                     <Field name='lookingForAJobDescription' component={renderInput} type='text' />
                 </div>
-                <div>Contacts:</div> 
-                <div className = {s.contactsField}>
+                <div>Contacts:</div>
+                <div className={s.contactsField}>
                     <div>
                         <label htmlFor='facebook'>Facebook</label>
                         <Field name='facebook' component={renderInput} type='text' />
@@ -71,12 +71,12 @@ let Settings = (props) => {
                         <Field name='youtube' component={renderInput} type='text' />
                     </div>
                 </div>
-                
+
                 <div>
                     <button type="submit">Submit</button>
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 

@@ -34,3 +34,14 @@
   color: $colorTheme;
   height: 30px;
 }
+.uploadPhoto {
+  display: none
+}
+.photoArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+.photoArea button{
+ margin: 5px
+}

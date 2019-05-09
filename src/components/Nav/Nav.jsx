@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
+
 const NavBar = styled.nav`
   grid-area: n;
   background-color: #94c5e6;
@@ -27,13 +28,12 @@ text-decoration: none;
 const Nav = (props) => {
   return (
     <NavBar>
-      <Item> <Link to='/profile' > Profile </Link> </Item>
-      <Item> <Link  to='/friends'> Friends </Link> </Item>
-      <Item> <Link to='/dialogs' > Messages </Link> </Item>
-      <Item> <Link to='/news'> News </Link> </Item>
-      <Item> <Link to='/music' > Music </Link> </Item>
-      {/* <Item> <Link to='/settings'> Settings </Link> </Item> */}
-    </NavBar>
+    <Item> <Link to='/profile' > Profile </Link> </Item>
+    <Item> <Link  to='/friends'> Friends </Link> </Item>
+    <Item> <Link to='/dialogs' > Messages </Link> </Item>
+    <Item> <Link to='/news'> News </Link> </Item>
+    <Item> <Link to='/music' > Music </Link> </Item>
+  </NavBar>   
   )
 }
 export default Nav;

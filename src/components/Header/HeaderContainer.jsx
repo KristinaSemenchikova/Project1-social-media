@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isLogin } from '../../redux/selectors';
-import { logOutAC } from '../../redux/users-reducer';
+import { toLogOut, isAuth } from '../../redux/login-reducer';
 import Header from './Header';
 
 const HeaderContainer = (props) => {
@@ -9,6 +9,7 @@ const HeaderContainer = (props) => {
         <Header 
         isLogin = {props.isLogin}
         logOut = {props.logOut}
+        isAuth = {props.isAuth}
          />
     )
 }
@@ -20,7 +21,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         logOut : () => {
-            dispatch(logOutAC())
+            dispatch(toLogOut())
+        },
+          isAuth : () => {
+            dispatch(isAuth())
         },
     }
 }

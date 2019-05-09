@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchUsers from './SearchUsers';
-import {users, nameFilter,searchUserByName} from './../../redux/selectors';
-import { followUserActionCreator, unfollowUserActionCreator, setUsersActionCreator,setFilterActionCreator, clearUsersAC} from '../../redux/users-reducer';
+import {nameFilter,searchUserByName} from './../../redux/selectors';
+import { getUsers,setFilterActionCreator, clearUsersAC, usersFilterAC, followUser, unfollowUser} from '../../redux/users-reducer';
+import { getUserInfo } from '../../redux/profile-reducer';
 
 const SearchUsersContainer = (props) => {
     return (
@@ -12,14 +13,15 @@ const SearchUsersContainer = (props) => {
         followUser = {props.followUser}
         unfollowUser = {props.unfollowUser}
         setFilter = {props.setFilter}
-        setUsers = {props.setUsers}
+        getUsers = {props.getUsers}
         clearUsers = {props.clearUsers}
+        usersFilter = {props.usersFilter}
+        getUserInfo = {props.getUserInfo}
          />
     )
 }
 const mapStateToProps = state => {
     return {
-        // users: users(state),
         users: searchUserByName(state),
         nameFilter: nameFilter(state)    
     }
@@ -27,19 +29,25 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         followUser : (id) => {
-            dispatch(followUserActionCreator(id))
+            dispatch(followUser(id))
         },
         unfollowUser: (id) => {
-            dispatch(unfollowUserActionCreator(id))
+            dispatch(unfollowUser(id))
         },
-        setUsers: (users) => {
-            dispatch(setUsersActionCreator(users))
+        getUsers: (page) => {
+            dispatch(getUsers(page))
         },
         setFilter: (name) => {
             dispatch(setFilterActionCreator(name))
         },
         clearUsers: () => {
             dispatch(clearUsersAC())
+        },
+        usersFilter: (filter)=> {
+            dispatch(usersFilterAC(filter))
+        },
+        getUserInfo: (id) => {
+            dispatch(getUserInfo(id))
         }
     }
 }
