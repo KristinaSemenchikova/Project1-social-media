@@ -3,6 +3,8 @@ import s from './ProfileAlbum.module.css';
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 
+
+
 const ProfileAlbum = (props) => {
   const [imgIndex, setImgIndex] = useState(0)
   const [isOpen, setIsOpen] = useState(false);

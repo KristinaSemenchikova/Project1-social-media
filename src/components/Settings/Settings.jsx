@@ -4,14 +4,25 @@ import { Field, reduxForm } from 'redux-form'
 
 const renderInput = field => {
     return (<div>
-        <input {...field.input} type={field.type} />
-        {field.meta.touched &&
-            field.meta.error &&
-            <span className="error">{field.meta.error}</span>}
+        {field.meta.error
+            ? <input {...field.input} type={field.type} className={s.error} placeholder = {field.meta.error}/>
+            : <input {...field.input} type={field.type} />
+        }
     </div>)
 };
+const validate = values => {
+    const errors = {}
+    if (!values.fullName) {
+        errors.fullName = 'Name is required'
+    }
+    if (!values.aboutMe) {
+        errors.aboutMe = 'About me is required'
+    }
+    return errors
+}
+
 let Settings = (props) => {
-    const { handleSubmit } = props;
+    const { handleSubmit, submitting, error } = props;
     return (
         <div className={s.settings}>
             <form onSubmit={handleSubmit}>
@@ -73,7 +84,7 @@ let Settings = (props) => {
                 </div>
 
                 <div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={submitting}>Submit</button>
                 </div>
             </form>
         </div>
@@ -81,7 +92,8 @@ let Settings = (props) => {
 }
 
 Settings = reduxForm({
-    form: 'settings'
+    form: 'settings',
+    validate
 })(Settings)
 
 export default Settings;

@@ -1,5 +1,6 @@
 import { handleActions, createAction } from "redux-actions";
 import instance, { axiosUpload } from "../Service/Service";
+import { statuses } from "./statuses";
 
 let initialState = {
     posts: [
@@ -15,7 +16,7 @@ let initialState = {
     newPostText: 'Anything meow?',
     statusText: 'Change status',
     profileInfo: {
-        userId : 1050,
+        userId: 1050,
         fullName: '',
         aboutMe: '',
         lookingForAJob: true,
@@ -36,11 +37,7 @@ let initialState = {
         }
     },
     photo: null,
-    setProfileInfoRequest: {
-        sending: false,
-        success: false,
-        error: false
-    },
+    userInfoRequestStatus: '',
     userInfo: null
 };
 
@@ -51,9 +48,7 @@ export const updateStatusActionCreator = createAction('UPDATE_STATUS_TEXT');
 export const likePostActionCreator = createAction('LIKE_POST');
 export const dislikePostActionCreator = createAction('DISLIKE_POST');
 
-export const sendingSetProfileRequestAC = createAction('SENDING_SET_REQUEST');
-export const setProfilerequestErrorAC = createAction('SET_REQUEST_ERROR_');
-export const setProfilerequestSuccessAC = createAction('SET_REQUEST_SUCCESS');
+export const setUserInfoRequestStatus = createAction('SET_USER_INFO_REQUEST_STATUS');
 
 export const setUserInfoAC = createAction('SET_USER_INFO');
 export const setUserPhoto = createAction('SET_USER_PHOTO');
@@ -78,33 +73,9 @@ const profileReducer = handleActions({
             return state;
         }
     },
-    [sendingSetProfileRequestAC.toString()]: (state, { payload: bool }) => {
-        let newState = {
-            ...state, setProfileInfoRequest: {
-                ...state.setProfileInfoRequest
-            }
-        };
-        newState.setProfileInfoRequest.sending = bool;
-        return newState;
-    },
-    [setProfilerequestSuccessAC.toString()]: (state) => {
-        let newState = {
-            ...state, setProfileInfoRequest: {
-                ...state.setProfileInfoRequest
-            }
-        };
-        newState.setProfileInfoRequest.success = true;
-        newState.setProfileInfoRequest.error = false;
-        return newState;
-    },
-    [setProfilerequestErrorAC.toString()]: (state) => {
-        let newState = {
-            ...state, setProfileInfoRequest: {
-                ...state.setProfileInfoRequest
-            }
-        };
-        newState.setProfileInfoRequest.success = false;
-        newState.setProfileInfoRequest.error = true;
+    [setUserInfoRequestStatus.toString()]: (state, { payload: status }) => {
+        let newState = { ...state };
+        newState.userInfoRequestStatus = status;
         return newState;
     },
     [updatePostActionCreator.toString()]: (state, { payload: text }) => {
@@ -157,14 +128,14 @@ const profileReducer = handleActions({
         newState.profileInfo = {
             aboutMe: values.aboutMe,
             contacts: {
-                facebook: values.facebook,
-                github: values.github,
-                instagram: values.instagram,
-                mainLink: values.mail,
-                twitter: values.twitter,
-                vk: values.vk,
-                website: values.website,
-                youtube: values.youtube
+                facebook: values.contacts.facebook,
+                github: values.contacts.github,
+                instagram: values.contacts.instagram,
+                mainLink: values.contacts.mail,
+                twitter: values.contacts.twitter,
+                vk: values.contacts.vk,
+                website: values.contacts.website,
+                youtube: values.contacts.youtube
             },
             lookingForAJob: values.lookingForAJob,
             lookingForAJobDescription: values.lookingForAJobDescription,
@@ -203,12 +174,15 @@ export const setStatus = (status) => {
         }
     }
 }
-export const getStatus = () => {
+export const getStatus = (id) => {
     return async (dispatch) => {
         try {
-            let result = await instance.get('profile/status/1050');
+            let result = await instance.get(`profile/status/${id}`);
             console.log(result);
-            dispatch(addStatusActionCreator())
+            if (result.status === 200) {
+                dispatch(updateStatusActionCreator(result.data));
+                dispatch(addStatusActionCreator())
+            }
         } catch (error) {
             console.log(error.message)
         }
@@ -226,10 +200,9 @@ export const uploadPhoto = (photo) => {
 }
 
 export const setProfileInfo = (values) => {
-    debugger
     return async (dispatch) => {
         try {
-            dispatch(sendingSetProfileRequestAC(true));
+            dispatch(setUserInfoRequestStatus(statuses.IN_PROGRESS));
             let result = await instance.put('profile',
                 {
 
@@ -249,26 +222,25 @@ export const setProfileInfo = (values) => {
                     "fullName": values.fullName
                 }
             );
-            dispatch(sendingSetProfileRequestAC(false));
             if (result.data.resultCode === 0) {
-                dispatch(setProfilerequestSuccessAC());
+                dispatch(setUserInfoRequestStatus(statuses.SUCCESS));
                 console.log(result.data)
             } else if (result.data.resultCode === 1) {
-                dispatch(setProfilerequestErrorAC());
+                dispatch(setUserInfoRequestStatus(statuses.ERROR));
             }
         } catch (error) {
-            alert(error.message)
+            dispatch(setUserInfoRequestStatus(statuses.ERROR));
+            console.log(error.message)
         }
     }
 }
 export const getProfileInfo = (id) => {
-    debugger
     return async (dispatch) => {
         try {
             let result = await instance.get(`/profile/${id}`);
             if (result.status === 200) {
                 dispatch(setProfileInfoAC(result.data))
-            }  
+            }
         } catch (error) {
             alert(error.message)
         }

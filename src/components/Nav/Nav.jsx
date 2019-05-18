@@ -29,7 +29,7 @@ const Nav = (props) => {
   return (
     <NavBar>
     <Item> <Link to='/profile' > Profile </Link> </Item>
-    <Item> <Link  to='/friends'> Friends </Link> </Item>
+    <Item> <Link  to='/album'> Photos </Link> </Item>
     <Item> <Link to='/dialogs' > Messages </Link> </Item>
     <Item> <Link to='/news'> News </Link> </Item>
     <Item> <Link to='/music' > Music </Link> </Item>

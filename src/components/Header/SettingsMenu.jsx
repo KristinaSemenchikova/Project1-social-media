@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import styled , { keyframes } from 'styled-components';
+import styled  from 'styled-components';
 import { NavLink } from "react-router-dom";
+import settings from '../../Images/settings.png';
 
 const Menu = styled.div`
 display: none;
@@ -35,7 +36,7 @@ const SettingsMenu = () => {
     const [isOpenMenu, setIsOpenMenu] = useState(false);
 
     let openMenu = () => {
-        if (isOpenMenu == false) {
+        if (isOpenMenu === false) {
             setIsOpenMenu(true);
             settingsMenu.current.style.display = 'block';
         } else {
@@ -47,7 +48,7 @@ const SettingsMenu = () => {
     return (
         <>
             <a href ='#' onClick={openMenu}>
-                <img alt='setting' src="https://img.icons8.com/windows/52/000000/settings.png" />
+                <img alt='setting' src={settings} />
             </a>
             <Menu ref={settingsMenu}>
                 <Ul>

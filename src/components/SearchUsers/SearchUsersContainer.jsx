@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchUsers from './SearchUsers';
-import {nameFilter,searchUserByName} from './../../redux/selectors';
+import {nameFilter,searchUserByName, getUsersRequest} from './../../redux/selectors';
 import { getUsers,setFilterActionCreator, clearUsersAC, usersFilterAC, followUser, unfollowUser} from '../../redux/users-reducer';
 import { getUserInfo } from '../../redux/profile-reducer';
 
@@ -17,13 +17,15 @@ const SearchUsersContainer = (props) => {
         clearUsers = {props.clearUsers}
         usersFilter = {props.usersFilter}
         getUserInfo = {props.getUserInfo}
+        getUsersRequest = {props.getUsersRequest}
          />
     )
 }
 const mapStateToProps = state => {
     return {
         users: searchUserByName(state),
-        nameFilter: nameFilter(state)    
+        nameFilter: nameFilter(state),
+        getUsersRequest : getUsersRequest(state)   
     }
 };
 const mapDispatchToProps = dispatch => {

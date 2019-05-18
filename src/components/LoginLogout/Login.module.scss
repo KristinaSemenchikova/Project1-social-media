@@ -1,0 +1,14 @@
+
+.logIn {
+  display: grid;
+  grid-template-columns: 20% 30%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: ". ." ". ." ;
+}
+.logIn :nth-child(odd) {
+  margin: 5px;
+  font-size: 90%;
+}
+.logIn :nth-child(even) {
+  margin: 5px;
+}

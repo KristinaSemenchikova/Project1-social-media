@@ -41,7 +41,7 @@ const newsReducer = handleActions({
         payload: id 
     }) => {
         let newState = { ...state, newsItem: [...state.newsItem] }
-        let newStateNewItem = newState.newsItem.filter((item) => item.id == id);
+        let newStateNewItem = newState.newsItem.filter((item) => item.id === id);
         newStateNewItem[0].likes += 1;
         newStateNewItem[0].isLiked = true;
         return newState;
@@ -51,7 +51,7 @@ const newsReducer = handleActions({
         payload: id 
     }) => {
         let newState = { ...state, newsItem: [...state.newsItem] }
-        let newStateNewItem = newState.newsItem.filter((item) => item.id == id);
+        let newStateNewItem = newState.newsItem.filter((item) => item.id === id);
         newStateNewItem[0].likes -= 1;
         newStateNewItem[0].isLiked = false;
         return newState;

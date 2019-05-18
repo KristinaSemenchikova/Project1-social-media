@@ -33,4 +33,11 @@ const Dialogs = (props) => {
 
   )
 }
+Dialogs.propTypes = {
+  dialogs: PropTypes.array,
+  messages: PropTypes.array,
+  newMessage: PropTypes.string,
+  onSend : PropTypes.func,
+  onMessageChange: PropTypes.func
+};
 export default Dialogs;

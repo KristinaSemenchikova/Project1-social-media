@@ -1,5 +1,8 @@
 import * as React from 'react';
 import s from './SearchUsers.module.scss'
+import { NavLink } from "react-router-dom";
+import Preloader from '../Preloader/Preloader';
+import PropTypes from 'prop-types';
 
 class SearchUsers extends React.PureComponent {
     constructor(props) {
@@ -31,7 +34,7 @@ class SearchUsers extends React.PureComponent {
     }
     unfollowUser(e) {
         let userID = +e.target.dataset.userId;
-       this.props.unfollowUser(userID);
+        this.props.unfollowUser(userID);
     }
     followUser(e) {
         let userID = +e.target.dataset.userId;
@@ -53,7 +56,7 @@ class SearchUsers extends React.PureComponent {
                         ? <img className={s.userAvatar} src='https://img.clipartimage.com/ninja-samurai-clipart-free-800_858.png' alt='avatar' />
                         : <img className={s.userAvatar} src={item.photos.small} alt='avatar' />
                     }
-                    <span> <a data-id={item.id} onClick={this.getFullProfile} href='#'>{item.name}</a></span>
+                    <span> <NavLink to={`/profile/${item.id}`} data-id={item.id} onClick={this.getFullProfile} >{item.name}</NavLink></span>
                 </div>
                 <span>{item.status}</span>
                 {(item.followed)
@@ -65,12 +68,15 @@ class SearchUsers extends React.PureComponent {
         )
         return (
             <div className={s.wrapper}>
-                <div className={s.users}>
-                    {users}
-                    <div>
-                        <button onClick={this.loadUsers}>More</button>
+                {this.props.getUsersRequest.status === 'IN_PROGRESS'
+                    ? <div className={s.preloader}><Preloader /></div>
+                    : <div className={s.users}>
+                        {users}
+                        <div>
+                            <button onClick={this.loadUsers}>More</button>
+                        </div>
                     </div>
-                </div>
+                }
                 <div className={s.filterItem}>
                     <span> {this.props.users.length} users </span>
                     Search by user's name
@@ -86,5 +92,17 @@ class SearchUsers extends React.PureComponent {
         )
     }
 }
+SearchUsers.propTypes = {
+    users : PropTypes.array,
+    nameFilter :PropTypes.string,
+    followUser : PropTypes.func,
+    unfollowUser : PropTypes.func,
+    setFilter : PropTypes.func,
+    getUsers : PropTypes.func,
+    clearUsers : PropTypes.func,
+    usersFilter :  PropTypes.func,
+    getUserInfo : PropTypes.func,
+    getUsersRequest : PropTypes.object
+  };
 export default SearchUsers;
 

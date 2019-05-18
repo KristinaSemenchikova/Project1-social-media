@@ -1,5 +1,7 @@
-
 .contactsField{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+.error {
+  border: 1px solid violet;
 }

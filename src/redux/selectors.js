@@ -27,7 +27,12 @@ export let userId = createSelector(info, profileInfo => profileInfo.userId);
 export let album = createSelector(profilePageSelector, profilePage => profilePage.photos);
 
 let searchUsersPageSelector = state => state.searchUsersPage;
+export let getUsersRequest = createSelector(searchUsersPageSelector, searchUsersPage => searchUsersPage.getUsersRequest);
 export let users = createSelector(searchUsersPageSelector, searchUsersPage => searchUsersPage.users);
+export let followedUsers = createSelector(users, users => {
+    let followedUsers = users.filter(user => user.followed === true)
+    return followedUsers;
+})
 export let usersFilter = createSelector(searchUsersPageSelector, searchUsersPage => searchUsersPage.usersFilter);
 export let filteredUsers = createSelector([users, usersFilter], (users, usersFilter) => {
     if (usersFilter === 'all') {
@@ -51,3 +56,5 @@ export let searchUserByName = createSelector([filteredUsers, nameFilter], (filte
 export let loginPageSelector = state => state.loginPage;
 export let authData = createSelector(loginPageSelector, loginPage => loginPage.authData);
 export let isLogin = createSelector(loginPageSelector, loginPage => loginPage.isLogin);
+export let captcha = createSelector(loginPageSelector, loginPage => loginPage.captcha);
+export let loginRequest = createSelector(loginPageSelector, loginPage => loginPage.loginRequest);

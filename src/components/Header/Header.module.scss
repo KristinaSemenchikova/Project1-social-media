@@ -1,0 +1,20 @@
+.header {
+  grid-area: h;
+  position: fixed;
+  width: 100%;
+  background: linear-gradient(to bottom, #ad7cfc 0, #94c5e6 100%);
+  border-bottom: 1px solid #ad7cfc;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.header .logo img {
+  width: 50px;
+  padding-left: 20px;
+}
+
+.header .buttons img {
+  height: 30px;
+  padding: 15px 10px 0px 0px;
+}

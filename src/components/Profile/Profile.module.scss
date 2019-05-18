@@ -1,0 +1,11 @@
+@import '../Styles/postStyle.module';
+
+.profile {
+  padding-top: 20px;
+}
+.item {
+  color: white;
+  }
+  .avatar img {
+    @include postAvatar
+  }
