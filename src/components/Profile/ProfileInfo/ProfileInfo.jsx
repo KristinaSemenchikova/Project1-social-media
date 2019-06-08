@@ -8,7 +8,7 @@ class ProfileInfo extends React.Component {
   render() {
     return (
       <div className={s.profileInfo}>
-        <img alt='avatar' src="https://cdn.images.express.co.uk/img/dynamic/128/590x/secondary/Cat4-430028.jpg" />
+        <img alt='avatar' src={this.props.info.photos.large} />
         <div className={s.description} >
           <span className={s.name}> {this.props.info.fullName} </span>
           <StatusField 

@@ -1,90 +1,69 @@
 import React from 'react';
 import s from './Settings.module.scss';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
+import Preloader from '../Preloader/Preloader';
 
-const renderInput = field => {
-    return (<div>
-        {field.meta.error
-            ? <input {...field.input} type={field.type} className={s.error} placeholder = {field.meta.error}/>
-            : <input {...field.input} type={field.type} />
-        }
-    </div>)
-};
-const validate = values => {
-    const errors = {}
-    if (!values.fullName) {
-        errors.fullName = 'Name is required'
-    }
-    if (!values.aboutMe) {
-        errors.aboutMe = 'About me is required'
-    }
-    return errors
-}
+
+const renderField = ({
+    input,
+    label,
+    type,
+    meta: { touched, error }
+}) => (
+        <div>
+            <label>{label}</label>
+            <div>
+                {error && touched
+                    ? <input {...input} placeholder={label} type={type} className={s.error} placeholder={error} />
+                    : <input {...input} placeholder={label} type={type} />
+                }
+            </div>
+        </div>
+    )
+
+const required = value => (value || typeof value === 'number' ? undefined : 'Required');
+
 
 let Settings = (props) => {
-    const { handleSubmit, submitting, error } = props;
+    let contacts = Object.keys(props.initialValues.contacts).map(el => <Field
+        key={`contacts.${el}`}
+        validate={[required]}
+        name={`contacts.${el}`}
+        label={el}
+        component={renderField}
+        type='text' />);
+    const { handleSubmit, submitting } = props;
     return (
         <div className={s.settings}>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor='fullName'>Fullname</label>
-                    <Field name='fullName' component={renderInput} type='text' />
-                </div>
-                <div>
-                    <label htmlFor='aboutMe'>About me</label>
-                    <Field name='aboutMe' component={renderInput} type='text' />
-                </div>
-                <div>
-                    <label htmlFor="lookingForAJob">Looking for a job</label>
-                    <Field
-                        name="lookingForAJob"
-                        id="lookingForAJob"
-                        component={renderInput}
-                        type="checkbox"
+
+                <Field label='Fullname' name='fullName' component={renderField} type='text'  validate={[required]} />
+
+                <Field label='About me' name='aboutMe' component={renderField} type='text'  validate={[required]} />
+
+                <Field
+                    label='Looking for a job'
+                    name='lookingForAJob'
+                    component={renderField}
+                    type='checkbox'               
+                />
+                {props.job && <Field
+                    label='Looking for a job description'
+                    name='lookingForAJobDescription'
+                    component={renderField}
+                    type='text' 
                     />
-                </div>
-                <div>
-                    <label htmlFor='lookingForAJobDescription'>Looking for a job</label>
-                    <Field name='lookingForAJobDescription' component={renderInput} type='text' />
-                </div>
+                }
+
                 <div>Contacts:</div>
                 <div className={s.contactsField}>
-                    <div>
-                        <label htmlFor='facebook'>Facebook</label>
-                        <Field name='facebook' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='github'>Github</label>
-                        <Field name='github' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='instagram'>Instagram</label>
-                        <Field name='instagram' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='mail'>mail</label>
-                        <Field name='mail' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='twitter'>twitter</label>
-                        <Field name='twitter' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='vk'>vk</label>
-                        <Field name='vk' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='website'>website</label>
-                        <Field name='website' component={renderInput} type='text' />
-                    </div>
-                    <div>
-                        <label htmlFor='youtube'>youtube</label>
-                        <Field name='youtube' component={renderInput} type='text' />
-                    </div>
+                    {contacts}
                 </div>
 
-                <div>
-                    <button type="submit" disabled={submitting}>Submit</button>
+                <div className = {s.sumbitButton}>
+                    {props.userInfoRequestStatus === 'IN_PROGRESS'
+                        ? <Preloader />
+                        : <button type="submit" disabled={submitting}>Submit</button>}
                 </div>
             </form>
         </div>
@@ -93,9 +72,9 @@ let Settings = (props) => {
 
 Settings = reduxForm({
     form: 'settings',
-    validate
 })(Settings)
 
 export default Settings;
+
 
 

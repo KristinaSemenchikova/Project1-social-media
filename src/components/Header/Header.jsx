@@ -18,7 +18,8 @@ class Header extends React.Component {
         this.props.isAuth();
         this.props.getProfileInfo(this.props.userId)
     }
-    toLogOut() {
+    toLogOut(e) {
+        e.preventDefault();
         this.props.logOut();
     }
     render() {
@@ -32,10 +33,10 @@ class Header extends React.Component {
                     ? (<div className={s.buttons}>
                         <NavLink to='/search'><img alt='search' src={search} /></NavLink>
                         <SettingsMenu />
-                        <a onClick={this.toLogOut}><img alt='logout' src={logout} /></a>
+                        <a href = '#' onClick={this.toLogOut}><img alt='logout' src={logout} /></a>
                     </div>)
                     : (<div className={s.buttons}>
-                        <a><img alt='login' src={login} /></a>
+                        <a href = '#'><img alt='login' src={login} /></a>
                     </div>)
                 }
             </header>

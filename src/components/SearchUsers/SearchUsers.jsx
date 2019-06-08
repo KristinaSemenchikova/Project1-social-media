@@ -27,7 +27,7 @@ class SearchUsers extends React.PureComponent {
         this.loadUsers()
     }
     componentWillUnmount() {
-        this.props.clearUsers()
+        this.props.clearUsers();
     }
     onSelect(event) {
         this.props.usersFilter(event.target.value)
@@ -42,7 +42,7 @@ class SearchUsers extends React.PureComponent {
     }
     getFullProfile(e) {
         let userID = +e.target.dataset.id;
-        this.props.getUserInfo(userID)
+        this.props.getProfileInfo(userID)
     }
     nameFilter(event) {
         let name = event.target.value;
@@ -80,7 +80,7 @@ class SearchUsers extends React.PureComponent {
                 <div className={s.filterItem}>
                     <span> {this.props.users.length} users </span>
                     Search by user's name
-                    <input placeholder="User's name" onChange={this.nameFilter} value={this.props.nameFilter}></input>
+                    <input placeholder="User's name" onChange={this.nameFilter} value={this.props.nameFilter}/>
                     Search by followed users
                     <select onChange={this.onSelect}>
                         <option value='all'>All users</option>

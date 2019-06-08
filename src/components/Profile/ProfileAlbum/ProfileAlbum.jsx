@@ -23,7 +23,7 @@ const ProfileAlbum = (props) => {
   let viewImg = (e) => {
     if (isOpen === false) {
       setIsOpen(true);
-      let currentImg = album.findIndex((item, i) => +e.currentTarget.id == i)
+      let currentImg = album.findIndex((item, i) => +e.currentTarget.id === i)
       setImgIndex(currentImg);
       image.current.style.visibility = 'visible';
     } else {

@@ -2,20 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginPage from './LoginPage';
 import { isLogin, authData, captcha, loginRequest } from './../../redux/selectors';
-import { setLoginAC, setPasswordAC, toLogIn, setCaptchaValue, toggleRememberMe } from '../../redux/login-reducer';
+import {  toLogIn, setCaptchaValue,  setAuthData } from '../../redux/login-reducer';
 
 const LoginPageContainer = (props) => {
+    let login = props.authData.login;
+    let password = props.authData.password;
+    let captcha = props.captcha;
+    let rememberMe = props.authData.rememberMe;
+
+    const submit = values => {
+        console.log(values);
+        props.setAuthData(values);
+        props.toLogIn();
+    }
+
     return (
         <LoginPage
+            onSubmit={submit}
+            initialValues = {{login,password,rememberMe}}
             isLogin={props.isLogin}
             toLogIn={props.toLogIn}
             authData={props.authData}
-            setLogin={props.setLogin}
-            setPassword={props.setPassword}
             captcha={props.captcha}
             setCaptchaValue={props.setCaptchaValue}
             loginRequest={props.loginRequest}
-            toggleRememberMe = {props.toggleRememberMe}
         />
     )
 }
@@ -32,17 +42,11 @@ const mapDispatchToProps = dispatch => {
         toLogIn: (data) => {
             dispatch(toLogIn(data))
         },
-        setLogin: (login) => {
-            dispatch(setLoginAC(login))
-        },
-        setPassword: (password) => {
-            dispatch(setPasswordAC(password))
-        },
-        toggleRememberMe: () => {
-            dispatch(toggleRememberMe())
-        },
         setCaptchaValue: (value) => {
             dispatch(setCaptchaValue(value))
+        },
+        setAuthData : (data)=> {
+            dispatch(setAuthData(data))
         }
     }
 }

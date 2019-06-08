@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
-
 const NavBar = styled.nav`
   grid-area: n;
   background-color: #94c5e6;
@@ -17,23 +16,28 @@ const Item = styled.div`
 margin: 15px;
 `;
 const Link = styled(NavLink)`
-text-decoration: none;
+   text-decoration: none;
   color: white;
-
   &.active {
     color: rgb(68, 0, 255);
   }
   `;
 
 const Nav = (props) => {
+  let getMyProfileInfo = () => {
+    props.getProfileInfo(props.userId);
+    props.getStatus(props.userId);
+  }
   return (
     <NavBar>
-    <Item> <Link to='/profile' > Profile </Link> </Item>
-    <Item> <Link  to='/album'> Photos </Link> </Item>
-    <Item> <Link to='/dialogs' > Messages </Link> </Item>
-    <Item> <Link to='/news'> News </Link> </Item>
-    <Item> <Link to='/music' > Music </Link> </Item>
-  </NavBar>   
+      <Item> <Link to='/profile' onClick={getMyProfileInfo}> Profile </Link> </Item>
+      <Item> <Link to='/album'> Photos </Link> </Item>
+      <Item> <Link to='/dialogs' > Messages </Link> </Item>
+      <Item> <Link to='/news'> News </Link> </Item>
+      <Item> <Link to='/music' > Music </Link> </Item>
+      <Item> <Link to='/apps' > Apps </Link> </Item>
+    </NavBar>
   )
 }
 export default Nav;
+

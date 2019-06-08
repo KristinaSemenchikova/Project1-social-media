@@ -19,7 +19,7 @@ const Album = (props) => {
   let viewImg = (e) => {
     if (isOpen === false) {
       setIsOpen(true);
-      let currentImg = album.findIndex((item, i) => +e.currentTarget.id == i)
+      let currentImg = album.findIndex((item, i) => +e.currentTarget.id === i)
       setImgIndex(currentImg);
       image.current.style.visibility = 'visible';
     } else {
@@ -28,7 +28,7 @@ const Album = (props) => {
       image.current.style.visibility = 'hidden'
     }
   };
-  let album = props.album.map((item, i) => <img id={i} key={i} src={item} onClick={viewImg}></img>);
+  let album = props.album.map((item, i) => <img alt = 'photo' id={i} key={i} src={item} onClick={viewImg}></img>);
 
   return (
     <div className={s.album}>

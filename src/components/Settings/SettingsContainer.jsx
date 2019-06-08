@@ -1,34 +1,22 @@
 import React from 'react';
+import { formValueSelector} from 'redux-form';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import {  setProfileInfo } from './../../redux/profile-reducer';
-import { fullName, aboutMe, lookingForAJob, lookingForAJobDescription, contacts } from './../../redux/selectors';
+import { fullName, aboutMe, lookingForAJob, lookingForAJobDescription, contacts , userInfoRequestStatus} from './../../redux/selectors';
 
 let SettingsContainer = (props) => {
-    let fullName = props.fullName;
-    let lookingForAJob = props.lookingForAJob;
-    let lookingForAJobDescription = props.lookingForAJobDescription;
-    let aboutMe = props.aboutMe;
-    let facebook = props.contacts.facebook;
-    let github = props.contacts.github;
-    let instagram = props.contacts.instagram;
-    let mail = props.contacts.mailLink;
-    let twitter = props.contacts.twitter;
-    let vk = props.contacts.vk;
-    let website = props.contacts.website;
-    let youtube = props.contacts.youtube;
-
+    debugger
     const submit = values => {
+      console.log(values);
       props.setProfileInfo(values);
     }
     return (
-        <Settings
+        <Settings         
+            userInfoRequestStatus = {props.userInfoRequestStatus}
             onSubmit={submit}
-            initialValues={{
-                fullName, aboutMe, lookingForAJob, lookingForAJobDescription,
-                facebook, github, instagram, mail, twitter,
-                vk, website, youtube
-            }} />
+            initialValues={props} 
+            job = {props.job}/>
     )
 }
 const mapStateToProps = (state) => {
@@ -38,6 +26,8 @@ const mapStateToProps = (state) => {
         lookingForAJob: lookingForAJob(state),
         lookingForAJobDescription: lookingForAJobDescription(state),
         contacts: contacts(state),
+        userInfoRequestStatus : userInfoRequestStatus(state),
+        job: formValueSelector('settings')(state,'lookingForAJob')
     })
 }
 const mapDispatchToProps = (dispatch) => {

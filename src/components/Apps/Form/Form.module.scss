@@ -1,0 +1,24 @@
+
+.memberArea{
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+input {
+  line-height: 20px;
+}
+.techArea {
+  padding: 5px;
+}
+.error {
+  border: 1px solid violet;
+}
+.name{
+  display: flex;
+  width : 300px;
+  padding: 5px;
+}
+a img {
+  width : 30px;
+  height: 30px;
+}

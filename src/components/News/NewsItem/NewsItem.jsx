@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const NewsItem = (props) => {
   let likePost = (e) => {
-    if (props.isLiked == false) {
+    if (props.isLiked === false) {
       e.target.src = 'https://image.flaticon.com/icons/svg/291/291212.svg';
       props.onLike(props.id);
     } else {
@@ -16,11 +16,11 @@ const NewsItem = (props) => {
     <div className={s.item}>
       <div className = {s.message}>
       {props.newsText}
-      <div> <img src={props.img}></img> </div>
+      <div> <img alt = 'avatar' src={props.img}></img> </div>
       </div>
       <div>
         <div className={s.likeButton}>
-          <img src='https://image.flaticon.com/icons/svg/66/66744.svg' onClick={likePost}></img>
+          <img alt = 'like' src='https://image.flaticon.com/icons/svg/66/66744.svg' onClick={likePost}></img>
           {props.likes}
         </div>
       </div>

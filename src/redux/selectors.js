@@ -15,6 +15,7 @@ export let newPostText = createSelector(profilePageSelector, profilePage => prof
 
 export let info = createSelector(profilePageSelector, profilePage => profilePage.profileInfo);
 export let status = createSelector(profilePageSelector, profilePage => profilePage.statusText);
+export let userInfoRequestStatus = createSelector(profilePageSelector, profilePage => profilePage.userInfoRequestStatus);
 
 export let fullName = createSelector(info, profileInfo => profileInfo.fullName);
 export let aboutMe = createSelector(info, profileInfo => profileInfo.aboutMe);
@@ -58,3 +59,4 @@ export let authData = createSelector(loginPageSelector, loginPage => loginPage.a
 export let isLogin = createSelector(loginPageSelector, loginPage => loginPage.isLogin);
 export let captcha = createSelector(loginPageSelector, loginPage => loginPage.captcha);
 export let loginRequest = createSelector(loginPageSelector, loginPage => loginPage.loginRequest);
+export let id = createSelector(loginPageSelector, loginPage => loginPage.userId);

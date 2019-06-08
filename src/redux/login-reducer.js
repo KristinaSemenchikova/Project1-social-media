@@ -4,9 +4,7 @@ import { statuses } from "./statuses";
 
 
 let initialState = {
-    userInfo: {
-        userId: null
-    },
+    userId: null,
     isLogin: null,
     authData: {
         login: '',
@@ -23,9 +21,13 @@ let initialState = {
         captchaValue: ''
     }
 };
+export const setUserId = createAction('SET_USER_ID');
+
+export const setAuthData = createAction('SET_AUTH_DATA');
 
 export const setLoginAC = createAction('SET_LOGIN');
 export const setPasswordAC = createAction('SET_PASSWORD');
+
 export const setCaptcha = createAction('SET_RECIEVED_CAPTCHA_URL');
 export const setCaptchaValue = createAction('SET_CAPTCHA_VALUE');
 export const toggleRememberMe = createAction('TOGGLE_REMEMBERME');
@@ -36,11 +38,23 @@ export const logOutAC = createAction('LOG_OUT');
 export const setLoginRequestStatus = createAction('SET_LOGIN_REQUEST_STATUS');
 
 const loginReducer = handleActions({
+    [setAuthData.toString()]: (state, {
+        payload: authData
+    }) => {
+        let newState = { ...state, authData: { ...authData } };
+        return newState;
+    },
     [setLoginAC.toString()]: (state, {
         payload: login
     }) => {
         let newState = { ...state, authData: { ...state.authData } };
         newState.authData.login = login;
+        return newState;
+    },
+    [setUserId.toString()]: (state, {
+        payload: userId
+    }) => {
+        let newState = { ...state, userId: userId };   
         return newState;
     },
     [toggleRememberMe.toString()]: (state) => {
@@ -109,7 +123,7 @@ export const toLogIn = () => {
                 })
             if (result.data.resultCode === 0) {
                 dispatch(setLoginRequestStatus(statuses.SUCCESS));
-                dispatch(loginActionCreator(true))
+                dispatch(loginActionCreator(true));
             } else if (result.data.resultCode === 1) {
                 dispatch(setLoginRequestStatus(statuses.ERROR));
             } else if (result.data.resultCode === 10) {
@@ -143,7 +157,8 @@ export const isAuth = () => {
         try {
             let result = await instance.get('auth/me')
             if (result.data.resultCode === 0) {
-                dispatch(loginActionCreator(true))
+                dispatch(loginActionCreator(true));
+                dispatch(setUserId(result.data.data.id))
             } else if (result.data.resultCode === 1) {
                 dispatch(loginActionCreator(false))
             }

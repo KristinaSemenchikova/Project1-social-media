@@ -124,6 +124,7 @@ const profileReducer = handleActions({
         return newState;
     },
     [setProfileInfoAC.toString()]: (state, { payload: values }) => {
+        debugger
         let newState = { ...state };
         newState.profileInfo = {
             aboutMe: values.aboutMe,
@@ -131,7 +132,7 @@ const profileReducer = handleActions({
                 facebook: values.contacts.facebook,
                 github: values.contacts.github,
                 instagram: values.contacts.instagram,
-                mainLink: values.contacts.mail,
+                mainLink: values.contacts.mainLink,
                 twitter: values.contacts.twitter,
                 vk: values.contacts.vk,
                 website: values.contacts.website,
@@ -200,22 +201,22 @@ export const uploadPhoto = (photo) => {
 }
 
 export const setProfileInfo = (values) => {
+    debugger
     return async (dispatch) => {
         try {
             dispatch(setUserInfoRequestStatus(statuses.IN_PROGRESS));
             let result = await instance.put('profile',
                 {
-
                     "aboutMe": values.aboutMe,
                     "contacts": {
-                        facebook: values.facebook,
-                        github: values.github,
-                        instagram: values.instagram,
-                        mainLink: values.mail,
-                        twitter: values.twitter,
-                        vk: values.vk,
-                        website: values.website,
-                        youtube: values.youtube
+                        facebook: values.contacts.facebook,
+                        github: values.contacts.github,
+                        instagram:  values.contacts.instagram,
+                        mainLink:  values.contacts.mainLink,
+                        twitter:  values.contacts.twitter,
+                        vk:  values.contacts.vk,
+                        website:  values.contacts.website,
+                        youtube:  values.contacts.youtube
                     },
                     "lookingForAJob": values.lookingForAJob,
                     "lookingForAJobDescription": values.lookingForAJobDescription,

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
 import Music from './components/Music/Music';
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -12,6 +11,10 @@ import AlbumContainer from './components/Profile/ProfileAlbum/AlbumContainer';
 import SearchUsersContainer from './components/SearchUsers/SearchUsersContainer';
 import LoginPageContainer from './components/LoginLogout/LoginPageContainer';
 import EditProfileContainer from './components/EditProfile/EditProfileContainer';
+import NavContainer from './components/Nav/NavContainer';
+import Nav from './components/Nav/Nav';
+import FormContainer from './components/Apps/Form/FormContainer';
+
 
 const App = (props) => {
 
@@ -31,7 +34,7 @@ const App = (props) => {
         <Nav />
         <div className='app-wrapper-content'>
           <Switch>
-            <Route exact path='/' render={() => <Profile />} />
+            {/* <Route exact path='/' render={() => <Profile />} /> */}
             <Route path='/dialogs' render={() => <DialogsContainer />} />
             <Route path='/profile:id?' render={() => <Profile />} />
             <Route path='/news' render={() => <NewsContainer />} />
@@ -40,6 +43,8 @@ const App = (props) => {
             <Route path='/album' render={() => <AlbumContainer />} />
             <Route path='/search' render={() => <SearchUsersContainer />} />
             <Route path='/edit' render={() => <EditProfileContainer />} />
+            <Route path='/apps' render={() => <FormContainer />} />
+
           </Switch>
         </div></>
     </div>

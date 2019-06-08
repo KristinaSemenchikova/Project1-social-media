@@ -8,13 +8,14 @@ import thunk from "redux-thunk";
 import loginReducer from "./login-reducer";
 
 
+
 let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     newsPage: newsReducer,
     searchUsersPage: usersReducer,
     loginPage: loginReducer,
-    form: formReducer
+    form: formReducer,
 });
 let store = createStore(reducers,applyMiddleware(thunk));
 
