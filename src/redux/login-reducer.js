@@ -1,5 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
-import instance from "../Service/Service";
+import instance from "../api/axiosInstance";
 import { statuses } from "./statuses";
 
 

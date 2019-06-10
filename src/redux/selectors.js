@@ -30,6 +30,7 @@ export let album = createSelector(profilePageSelector, profilePage => profilePag
 let searchUsersPageSelector = state => state.searchUsersPage;
 export let getUsersRequest = createSelector(searchUsersPageSelector, searchUsersPage => searchUsersPage.getUsersRequest);
 export let users = createSelector(searchUsersPageSelector, searchUsersPage => searchUsersPage.users);
+export let usersTotalCount  = createSelector(searchUsersPageSelector, searchUsersPage => searchUsersPage.usersTotalCount);
 export let followedUsers = createSelector(users, users => {
     let followedUsers = users.filter(user => user.followed === true)
     return followedUsers;

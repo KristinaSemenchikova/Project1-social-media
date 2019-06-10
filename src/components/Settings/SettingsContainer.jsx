@@ -6,7 +6,6 @@ import {  setProfileInfo } from './../../redux/profile-reducer';
 import { fullName, aboutMe, lookingForAJob, lookingForAJobDescription, contacts , userInfoRequestStatus} from './../../redux/selectors';
 
 let SettingsContainer = (props) => {
-    debugger
     const submit = values => {
       console.log(values);
       props.setProfileInfo(values);

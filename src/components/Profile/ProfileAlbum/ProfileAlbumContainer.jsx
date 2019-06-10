@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ProfileAlbum from './ProfileAlbum';
 import {album} from './../../../redux/selectors';
+import Album from './Album';
+import { NavLink } from "react-router-dom";
 
 const ProfileAlbumContainer = (props) => {
+  let album = props.album.slice(0, 4);
   return (
-    <ProfileAlbum
-    album = {props.album} 
+    <Album
+    title = {<NavLink to='/album'>My photos </NavLink>}
+    album = {album} 
     />       
   )
 }

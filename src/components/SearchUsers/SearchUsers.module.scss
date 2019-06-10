@@ -1,5 +1,5 @@
-@import './../Styles/postStyle.module';
-@import './../Styles/variables.module.scss';
+@import './../styles/postStyle.module';
+@import './../styles/variables.module.scss';
 
 .wrapper{
   display: grid;
@@ -37,5 +37,24 @@
   align-self: center;
   justify-self: center;
 }
+.pagebuttons {
+ display: flex;
+ justify-content: space-between;
+ padding: 5px;
+}
+.pagebuttons button{
+ padding: 5px;
+ border-radius: 50%;
+ width: 25px;
+ border: 1px solid $navColor;
+ background-color: white;
+ color: $anchor;
+}
+.pagebuttons .activeButton {
+  color: $anchor;
+  font-weight: bolder;
+  box-shadow: 2px $navColor;
+ }
+
 
 

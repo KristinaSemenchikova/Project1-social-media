@@ -2,10 +2,10 @@ import React from 'react';
 import s from './Header.module.scss';
 import SettingsMenu from './SettingsMenu';
 import { NavLink, Redirect } from "react-router-dom";
-import logo from '../../Images/logo.png';
-import search from '../../Images/search.png';
-import login from '../../Images/login.png';
-import logout from '../../Images/logout.png';
+import logo from '../../assets/logo.png';
+import search from '../../assets/search.png';
+import login from '../../assets/login.png';
+import logout from '../../assets/logout.png';
 import PropTypes from 'prop-types';
 
 class Header extends React.Component {

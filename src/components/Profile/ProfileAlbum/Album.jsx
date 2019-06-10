@@ -29,10 +29,9 @@ const Album = (props) => {
     }
   };
   let album = props.album.map((item, i) => <img alt = 'photo' id={i} key={i} src={item} onClick={viewImg}></img>);
-
   return (
     <div className={s.album}>
-      <span> My photos </span>
+      <span>{props.title}</span>
       <div > {album} </div>
       <div className={s.view} ref={image}>
         <button onClick={prev}>prev</button>

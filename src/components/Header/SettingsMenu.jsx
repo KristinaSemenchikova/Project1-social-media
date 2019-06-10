@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled  from 'styled-components';
 import { NavLink } from "react-router-dom";
-import settings from '../../Images/settings.png';
+import settings from '../../assets/settings.png';
 
 const Menu = styled.div`
 display: none;

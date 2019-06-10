@@ -10,45 +10,46 @@ class SearchUsers extends React.PureComponent {
         this.state = {
             page: 1
         };
-        this.onSelect = this.onSelect.bind(this);
-        this.nameFilter = this.nameFilter.bind(this);
-        this.unfollowUser = this.unfollowUser.bind(this);
-        this.followUser = this.followUser.bind(this);
-        this.loadUsers = this.loadUsers.bind(this);
-        this.getFullProfile = this.getFullProfile.bind(this)
     }
-    loadUsers() {
-        this.props.getUsers(this.state.page)
+    loadUsers = (e) => {
+        let page = +e.target.dataset.page;
         this.setState({
-            page: this.state.page + 1
+            page: page
         })
+        this.props.getUsers(page);
+    }
+    onSelect = (event) => {
+        this.props.usersFilter(event.target.value)
+    }
+    unfollowUser = (e) => {
+        let userID = +e.target.dataset.userId;
+        this.props.unfollowUser(userID);
+    }
+    followUser = (e) => {
+        let userID = +e.target.dataset.userId;
+        this.props.followUser(userID);
+    }
+    getFullProfile = (e) => {
+        let userID = +e.target.dataset.id;
+        this.props.getProfileInfo(userID)
+    }
+    nameFilter = (event) =>  {
+        let name = event.target.value;
+        this.props.setFilter(name);
     }
     componentDidMount() {
-        this.loadUsers()
+        this.props.getUsers(this.state.page)
     }
     componentWillUnmount() {
         this.props.clearUsers();
     }
-    onSelect(event) {
-        this.props.usersFilter(event.target.value)
-    }
-    unfollowUser(e) {
-        let userID = +e.target.dataset.userId;
-        this.props.unfollowUser(userID);
-    }
-    followUser(e) {
-        let userID = +e.target.dataset.userId;
-        this.props.followUser(userID);
-    }
-    getFullProfile(e) {
-        let userID = +e.target.dataset.id;
-        this.props.getProfileInfo(userID)
-    }
-    nameFilter(event) {
-        let name = event.target.value;
-        this.props.setFilter(name);
-    }
+     pagesCount = Math.ceil(this.props.usersTotalCount / 10);
     render() {
+        let pageButtons = Array.from({length :this.pagesCount }, (v,k) => k).
+        map(num  =>  num + 1 === this.state.page 
+            ? <button  className  = {s.activeButton} data-page = { num + 1} onClick = {this.loadUsers}>{ num + 1}</button> 
+            : <button  data-page = { num + 1} onClick = {this.loadUsers}>{num + 1}</button>
+         )
         let users = this.props.users.map(item => {
             return <div className={s.userItem} key={item.id}>
                 <div className={s.avatarBlock}>
@@ -71,10 +72,10 @@ class SearchUsers extends React.PureComponent {
                 {this.props.getUsersRequest.status === 'IN_PROGRESS'
                     ? <div className={s.preloader}><Preloader /></div>
                     : <div className={s.users}>
-                        {users}
-                        <div>
-                            <button onClick={this.loadUsers}>More</button>
+                        <div className = {s.pagebuttons}>
+                        {pageButtons}
                         </div>
+                        {users}
                     </div>
                 }
                 <div className={s.filterItem}>

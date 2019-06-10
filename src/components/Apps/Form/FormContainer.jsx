@@ -8,7 +8,8 @@ let FormContainer = (props) => {
       console.log(values);
     }
     return (
-        <Form         
+        <Form  
+        onSubmit={submit}      
            />
     )
 }

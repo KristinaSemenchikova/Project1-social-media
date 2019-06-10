@@ -6,8 +6,9 @@ import {album} from './../../../redux/selectors';
 const AlbumContainer = (props) => {
   return (
   <Album 
-  album = {props.album} />
-  )
+  album = {props.album} 
+  title = 'My photos'
+  />)
 }
 
 const mapStateToProps = (state) => {

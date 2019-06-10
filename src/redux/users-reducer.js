@@ -1,5 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
-import instance from "../Service/Service";
+import instance from "../api/axiosInstance";
 import { statuses } from "./statuses";
 
 let initialState = {
@@ -10,6 +10,7 @@ let initialState = {
         errorMessage: null
     },
     users: [],
+    usersTotalCount : null,
     usersFilter: 'all',
     nameFilter: ''
 };
@@ -29,9 +30,12 @@ export const setUsersActionCreator = createAction('SET_USERS');
 const usersReducer = handleActions({
 
     [setUsersActionCreator.toString()]: (state, {
-        payload: users
+        payload: usersData
     }) => {
-        let newState = { ...state, users: [...state.users, ...users] };
+        let newState = { ...state, 
+            users: [ ...usersData.items],
+            usersTotalCount : usersData.totalCount
+         };
         return newState;
     },
     [setUsersRequestStatus.toString()]: (state, {
@@ -93,7 +97,8 @@ export const getUsers = (page) => {
                 })
             if (result.status === 200) {
                 dispatch(setUsersRequestStatus(statuses.SUCCESS));
-                dispatch(setUsersActionCreator(result.data.items));
+                console.log(result);
+                dispatch(setUsersActionCreator(result.data));
             } else if (result.error !== null) {
                 dispatch(setUsersRequestStatus(statuses.ERROR));
             }

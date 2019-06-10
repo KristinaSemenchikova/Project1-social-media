@@ -1,5 +1,5 @@
 import { handleActions, createAction } from "redux-actions";
-import instance, { axiosUpload } from "../Service/Service";
+import instance, { axiosUpload } from "../api/axiosInstance";
 import { statuses } from "./statuses";
 
 let initialState = {
@@ -124,7 +124,6 @@ const profileReducer = handleActions({
         return newState;
     },
     [setProfileInfoAC.toString()]: (state, { payload: values }) => {
-        debugger
         let newState = { ...state };
         newState.profileInfo = {
             aboutMe: values.aboutMe,
@@ -156,7 +155,6 @@ export const getUserInfo = (id) => {
     return async (dispatch) => {
         try {
             let result = await instance.get(`/profile/${id}`);
-            console.log(result);
             dispatch(setUserInfoAC(result))
         } catch (error) {
             alert(error.message)
@@ -179,7 +177,6 @@ export const getStatus = (id) => {
     return async (dispatch) => {
         try {
             let result = await instance.get(`profile/status/${id}`);
-            console.log(result);
             if (result.status === 200) {
                 dispatch(updateStatusActionCreator(result.data));
                 dispatch(addStatusActionCreator())
@@ -193,7 +190,6 @@ export const uploadPhoto = (photo) => {
     return async (dispatch) => {
         try {
             let result = await axiosUpload.put('profile/photo', photo);
-            console.log(result)
         } catch (error) {
             alert(error.message)
         }
@@ -201,7 +197,6 @@ export const uploadPhoto = (photo) => {
 }
 
 export const setProfileInfo = (values) => {
-    debugger
     return async (dispatch) => {
         try {
             dispatch(setUserInfoRequestStatus(statuses.IN_PROGRESS));
@@ -225,7 +220,6 @@ export const setProfileInfo = (values) => {
             );
             if (result.data.resultCode === 0) {
                 dispatch(setUserInfoRequestStatus(statuses.SUCCESS));
-                console.log(result.data)
             } else if (result.data.resultCode === 1) {
                 dispatch(setUserInfoRequestStatus(statuses.ERROR));
             }
